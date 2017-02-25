@@ -4,7 +4,7 @@
   <% @movies.each do |movie| %>
     <li>
       <strong><%= "#{movie.title}"%></strong>
-      <%= " (#{movie.rating}): #{movie.total_gross}"%>
+      <%= " (#{movie.rating}): #{number_to_currency(movie.total_gross)}"%>
     </li>
   <% end %>
 </ul>
