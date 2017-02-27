@@ -53,9 +53,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :test, :development do
-  gem "rspec-rails"
+  gem "rspec-rails", "3.5.0.beta3"
 end
 
 group :test do
-  gem "capybara"
+  gem "capybara", "2.7.1"
 end
