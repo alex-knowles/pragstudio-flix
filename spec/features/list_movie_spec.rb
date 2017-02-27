@@ -9,7 +9,7 @@ describe "Viewing a movie" do
                       description: "Tony Stark builds an armored suit to fight the throes of evil",
                       released_on: "2008-05-02")
 
-    visit "http://example.com/movies/#{movie.id}"
+    visit movie_url(movie)
 
     expect(page).to have_text(movie.title)
     expect(page).to have_text(movie.rating)
