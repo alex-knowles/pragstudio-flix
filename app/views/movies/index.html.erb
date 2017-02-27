@@ -1,4 +1,6 @@
-<h1>Movies</h1>
+<h1>
+  <%= "#{Movie.count} #{"Movie".pluralize(Movie.count, :en)}" %>
+</h1>
 
 <ul>
   <% @movies.each do |movie| %>
@@ -7,12 +9,13 @@
         <h2><%= movie.title %></h2>
       </header>
       <p>
-        <%= movie.description %>
+        <%= truncate(movie.description, length: 40, separator: ' ') %>
       </p>
       <table>
         <tr>
           <th>Released:</th>
-          <td><%= movie.released_on %></td>
+          <% release_date = movie.released_on%>
+          <td><%=  "#{release_date} (#{time_ago_in_words(release_date)} ago)" %></td>
         </tr>
         <tr>
           <th>Rating:</th>
@@ -20,7 +23,7 @@
         </tr>
         <tr>
           <th>Total Gross:</th>
-          <td><%= number_to_currency(movie.total_gross) %></td>
+          <td><%= format_total_gross(movie) %></td>
         </tr>
       </table>
     </article>
