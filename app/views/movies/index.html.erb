@@ -9,7 +9,7 @@
         <h2><%= movie.title %></h2>
       </header>
       <p>
-        <%= movie.description %>
+        <%= truncate(movie.description, length: 40, separator: ' ') %>
       </p>
       <table>
         <tr>
