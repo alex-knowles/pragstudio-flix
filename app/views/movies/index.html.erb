@@ -2,6 +2,8 @@
   <%= "#{Movie.count} #{"Movie".pluralize(Movie.count, :en)}" %>
 </h1>
 
+<%= link_to("Add New Movie", new_movie_path) %>
+
 <ul>
   <% @movies.each do |movie| %>
     <article>
