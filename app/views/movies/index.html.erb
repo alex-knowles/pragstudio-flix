@@ -1,5 +1,5 @@
 <h1>
-  <%= "#{@movies.count} #{"Movie".pluralize(Movie.count, :en)}" %>
+  <%= "#{@movies.count} #{"Movie".pluralize(@movies.count, :en)}" %>
 </h1>
 
 <%= link_to("Add New Movie", new_movie_path) %>
