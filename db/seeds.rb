@@ -19,5 +19,12 @@ Movie.create!([
     total_gross: 403706375.00,
     description: "Peter Parker gets bit by a genetically modified spider",
     released_on: "2002-05-03"
+  },
+  {
+    title: "Catwoman",
+    rating: "PG-13",
+    total_gross: 40200000.00,
+    description: "Patience Philips has a more than respectable career as a graphic designer",
+    released_on: "2004-07-23"
   }
 ])
