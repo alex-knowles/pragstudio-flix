@@ -38,6 +38,7 @@ describe "Viewing the list of movies" do
 
     expect(page).to have_text(released_movie.title)
     expect(page).not_to have_text(unreleased_title)
+    expect(page).to have_text("1 Movie")
   end
 
 end
