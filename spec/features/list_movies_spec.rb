@@ -17,7 +17,7 @@ describe "Viewing the list of movies" do
                       description: "Peter Parker gets bit by a genetically modified spider",
                       released_on: "2002-05-03")
 
-    visit 'http://example.com/movies'
+    visit movies_url
 
     expect(page).to have_text("3 Movies")
     expect(page).to have_text(movie1.title)
