@@ -17,7 +17,7 @@ describe "Viewing the list of movies" do
                       description: "Peter Parker gets bit by a genetically modified spider",
                       released_on: "2002-05-03")
 
-    visit 'http://example.com/movies'
+    visit movies_url
 
     expect(page).to have_text("3 Movies")
     expect(page).to have_text(movie1.title)
@@ -28,6 +28,17 @@ describe "Viewing the list of movies" do
     expect(page).to have_text("$300,000,000.00")
     expect(page).to have_text(movie1.description[0..9])
     expect(page).to have_text(movie1.released_on)
+  end
+
+  it "doesn't show movies that haven't been released yet" do
+    released_movie = Movie.create(movie_attributes)
+    unreleased_title = "Unreleased Movie"
+    unreleased_movie = Movie.create(movie_attributes(title: unreleased_title, released_on: Date.tomorrow))
+    visit movies_url
+
+    expect(page).to have_text(released_movie.title)
+    expect(page).not_to have_text(unreleased_title)
+    expect(page).to have_text("1 Movie")
   end
 
 end
