@@ -1,1 +1,12 @@
 <h1><%= "Editing #{@movie.title}" %></h1>
+
+<%= form_for @movie do |f| %>
+  <p>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
