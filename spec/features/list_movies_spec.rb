@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Viewing the list of movies" do
 
   it "shows the movies" do
-    movie1 = Movie.create(movie_attributes)
+    movie1 = Movie.create(movie_attributes(total_gross: 300000000))
 
     movie2 = Movie.create(title: "Superman",
                       rating: "PG",
@@ -25,7 +25,7 @@ describe "Viewing the list of movies" do
     expect(page).to have_text(movie3.title)
 
     expect(page).to have_text(movie1.rating)
-    expect(page).to have_text("$318,412,101.00")
+    expect(page).to have_text("$300,000,000.00")
     expect(page).to have_text(movie1.description[0..9])
     expect(page).to have_text(movie1.released_on)
   end
