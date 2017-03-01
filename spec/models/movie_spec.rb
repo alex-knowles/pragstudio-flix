@@ -56,4 +56,10 @@ describe "A movie" do
     expect(movie.errors[:duration].any?).to eq(true)
   end
 
+  it "requires a description over 24 characters" do
+    movie = Movie.new(description: "X" * 24)
+    movie.valid?
+    expect(movie.errors[:description].any?).to eq(true)
+  end
+
 end
