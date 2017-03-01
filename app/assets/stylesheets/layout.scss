@@ -8,6 +8,11 @@ header#page-header {
   border-bottom: 3px solid darken($primary-color, 10%);
 }
 
+header#page-header h1 {
+  text-align: center;
+  text-transform: uppercase;
+}
+
 footer#page-footer {
   text-align: center;
   padding: 5px;
