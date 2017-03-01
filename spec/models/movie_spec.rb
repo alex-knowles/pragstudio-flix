@@ -38,4 +38,10 @@ describe "A movie" do
     expect(movie.errors[:title].any?).to eq(true)
   end
 
+  it "requires a description" do
+    movie = Movie.new(description: "")
+    movie.valid?
+    expect(movie.errors[:description].any?).to eq(true)
+  end
+
 end
