@@ -1,18 +1,21 @@
+$primary-color: #237CBE;
+$secondary-color: #F0F0F0;
+
 header#page-header {
-  color: #F0F0F0;
-  background: #237CBE;
+  color: $secondary-color;
+  background: $primary-color;
   padding: 5px;
 }
 
 footer#page-footer {
   text-align: center;
   padding: 5px;
-  color: #237CBE;
-  background: #F0F0F0;
+  color: $primary-color;
+  background: $secondary-color;
 }
 
 aside#sidebar {
   float: right;
-  background: #F0F0F0;
+  background: $secondary-color;
   width: 200px;
 }
