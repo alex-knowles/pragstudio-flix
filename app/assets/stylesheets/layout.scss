@@ -5,6 +5,7 @@ header#page-header {
   color: $secondary-color;
   background: $primary-color;
   padding: 5px;
+  border-bottom: 3px solid darken($primary-color, 10%);
 }
 
 footer#page-footer {
@@ -12,6 +13,7 @@ footer#page-footer {
   padding: 5px;
   color: $primary-color;
   background: $secondary-color;
+  border-top: 3px solid darken($secondary-color, 10%);
 }
 
 aside#sidebar {
