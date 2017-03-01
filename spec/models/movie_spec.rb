@@ -98,4 +98,22 @@ describe "A movie" do
     end
   end
 
+  it "accepts any rating that is in the approved list" do
+    ratings = %w[G PG PG-13 R NC-17]
+    ratings.each do |rating|
+      movie = Movie.new(rating: rating)
+      movie.valid?
+      expect(movie.errors[:rating].any?).to eq(false)
+    end
+  end
+
+  it "rejects any rating that is not in the approved list" do
+    ratings = %w[R-13 R-16 R-18 R-21]
+    ratings.each do |rating|
+      movie = Movie.new(rating: rating)
+      movie.valid?
+      expect(movie.errors[:rating].any?).to eq(true)
+    end
+  end
+
 end
