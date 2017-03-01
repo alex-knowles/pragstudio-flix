@@ -62,4 +62,22 @@ describe "A movie" do
     expect(movie.errors[:description].any?).to eq(true)
   end
 
+  it "accepts a $0 total gross" do
+    movie = Movie.new(total_gross: 0.00)
+    movie.valid?
+    expect(movie.errors[:total_gross].any?).to eq(false)
+  end
+
+  it "accepts a positive total gross" do
+    movie = Movie.new(total_gross: 10000000.00)
+    movie.valid?
+    expect(movie.errors[:total_gross].any?).to eq(false)
+  end
+
+  it "rejects a negative total gross" do
+    movie = Movie.new(total_gross: -10000000.00)
+    movie.valid?
+    expect(movie.errors[:total_gross].any?).to eq(true)
+  end
+
 end
