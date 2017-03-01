@@ -32,4 +32,10 @@ describe "A movie" do
     expect(Movie.released).to eq([movie3, movie2, movie1])
   end
 
+  it "requires a title" do
+    movie = Movie.new(title: "")
+    movie.valid?
+    expect(movie.errors[:title].any?).to eq(true)
+  end
+
 end
