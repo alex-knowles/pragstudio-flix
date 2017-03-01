@@ -116,4 +116,9 @@ describe "A movie" do
     end
   end
 
+  it "is valid with example attributes" do
+    movie = Movie.new(movie_attributes)
+    expect(movie.valid?).to eq(true)
+  end
+
 end
