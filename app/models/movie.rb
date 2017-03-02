@@ -1,6 +1,7 @@
 class Movie < ApplicationRecord
 
-  validates :title, :description, :released_on, :duration, presence: true
+  validates :title, :released_on, :duration, presence: true
+  validates :description, length: { minimum: 25 }
 
   def flop?
     total_gross.blank? || total_gross < 50000000
