@@ -98,6 +98,12 @@ describe "A movie" do
     end
   end
 
+  it "accepts blank image file name" do
+    movie = Movie.new(image_file_name: "")
+    movie.valid?
+    expect(movie.errors[:image_file_name].any?).to eq(false)
+  end
+
   it "accepts any rating that is in the approved list" do
     ratings = %w[G PG PG-13 R NC-17]
     ratings.each do |rating|
