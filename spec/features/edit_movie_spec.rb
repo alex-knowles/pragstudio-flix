@@ -28,4 +28,15 @@ describe "Editing a movie" do
     expect(page).to have_text(expected_title)
   end
 
+  it "does not save when invalid data is submitted" do
+    movie = Movie.create(movie_attributes)
+    visit edit_movie_url(movie)
+    invalid_title = ""
+    fill_in 'Title', with: invalid_title
+    click_button 'Update Movie'
+    expect(movie.title).not_to eq(invalid_title)
+    expect(current_path).to eq(movie_path(movie))
+    expect(page).to have_text("error")
+  end
+
 end
