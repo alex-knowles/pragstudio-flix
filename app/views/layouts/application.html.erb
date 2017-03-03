@@ -13,7 +13,11 @@
 
     <div id="wrapper">
 
-      <% if flash[:notice] %>
+      <% if flash[:alert] %>
+        <section class="flash alert">
+          <%= flash[:alert] %>
+        </section>
+      <% elsif flash[:notice] %>
         <section class="flash notice">
           <%= flash[:notice] %>
         </section>
