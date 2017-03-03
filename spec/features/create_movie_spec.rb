@@ -20,6 +20,7 @@ describe "Creating a new movie" do
     click_button "Create Movie"
     expect(current_path).to eq(movie_path(Movie.last))
     expect(page).to have_text(expected_title)
+    expect(page).to have_text("Movie created successfully!")
   end
 
   it "has 'Cancel' link that returns to the index page without changing anything" do
