@@ -1,4 +1,5 @@
 class Movie < ApplicationRecord
+  has_many :reviews
 
   RATINGS = %w(G PG PG-13 R NC-17)
 
