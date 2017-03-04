@@ -1,6 +1,6 @@
 class Review < ApplicationRecord
   belongs_to :movie
 
-  validates :name, presence: true
+  validates :name, :comment, presence: true
 
 end
