@@ -27,7 +27,7 @@ describe "A review" do
     expect(review.errors[:comment].any?).to eq(true)
   end
 
-  it "rejects a comment over 3 characters" do
+  it "rejects a comment 3 characters or less" do
     review = Review.new(comment: "X" * 3)
     review.valid?
     expect(review.errors[:comment].any?).to eq(true)
