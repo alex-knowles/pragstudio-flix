@@ -6,7 +6,9 @@
     <li>
       <article class="review">
         <header>
-          <h2><%= review.name %></h2>
+          <h2><%= "#{pluralize(review.stars, "star")} by #{review.name}" %></h2>
+          <p><%= review.comment %></p>
+          <p><i><%= time_ago_in_words(review.created_at) %> ago</i></p>
         </header>
         <footer>
         </footer>
