@@ -11,4 +11,14 @@ class ReviewsController < ApplicationController
     @review = @movie.reviews.new
   end
 
+  def create
+    @movie = Movie.find(params[:movie_id])
+    @review = @movie.reviews.new(params.require(:review).permit(:name, :stars, :comment))
+    if @review.save
+      redirect_to movie_reviews_url(@movie)
+    else
+      render :new
+    end
+  end
+
 end
