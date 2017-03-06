@@ -3,20 +3,24 @@
 </header>
 
 <%= form_for([@movie, @review]) do |f| %>
-  <p>
-    <%= f.label :name %></br>
-    <%= f.text_field :name, size: 40, autofocus: true %>
-  </p>
-  <p>
-    <%= f.label :stars %></br>
-    <%= f.select :stars, Review::STARS, prompt: "Pick one" %>
-  </p>
-  <p>
-    <%= f.label :comment %></br>
-    <%= f.text_area :comment, cols: 40, rows: 7 %>
-  </p>
-  <p>
-    <%= f.submit "Post Review"%>
-    <%= link_to "Cancel", @movie, class: 'button' %>
-  </p>
+  <fieldset>
+    <ol>
+      <li class="required">
+        <%= f.label :name %>
+        <%= f.text_field :name, size: 40, autofocus: true %>
+      </li>
+      <li class="required stars">
+        <%= f.label :stars %>
+        <%= f.select :stars, Review::STARS, prompt: "Pick one" %>
+      </li>
+      <li class="required">
+        <%= f.label :comment %>
+        <%= f.text_area :comment, cols: 40, rows: 7 %>
+      </li>
+    </ol>
+    <p>
+      <%= f.submit "Post Review"%>
+      <%= link_to "Cancel", @movie, class: 'button' %>
+    </p>
+  </fieldset>
 <% end %>
