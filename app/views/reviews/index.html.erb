@@ -1,0 +1,17 @@
+<header>
+  <h1>Reviews for <%= link_to(@movie.title, @movie) %></h1>
+</header>
+<ul id="reviews">
+  <% @reviews.each do |review| %>
+    <li>
+      <article class="review">
+        <header>
+          <h2><%= review.name %></h2>
+        </header>
+        <footer>
+        </footer>
+      </article>
+    </li>
+  <% end %>
+</ul>
+
