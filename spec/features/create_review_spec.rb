@@ -16,4 +16,13 @@ describe "Creating a review" do
     expect(page).to have_text("Thanks for your review!")
   end
 
+  it "does not save the review if it's invalid" do
+    movie = Movie.create(movie_attributes)
+    visit new_movie_review_url(movie)
+    expect {
+      click_button "Post Review"
+    }.not_to change(Review, :count)
+    expect(page).to have_text("error")
+  end
+
 end
