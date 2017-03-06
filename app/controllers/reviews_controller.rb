@@ -6,4 +6,9 @@ class ReviewsController < ApplicationController
     @reviews = Review.where(movie_id:movie_id).order("created_at desc")
   end
 
+  def new
+    @movie = Movie.find(params[:movie_id])
+    @review = @movie.reviews.new
+  end
+
 end
