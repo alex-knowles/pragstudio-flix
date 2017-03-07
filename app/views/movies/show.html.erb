@@ -8,10 +8,15 @@
   <p>
     <%= @movie.description %>
   </p>
-  
+
   <h3 class="no-rule">
-    <%= @movie.rating %> &bull; <%= @movie.duration %> 
+    <%= @movie.rating %> &bull; <%= @movie.duration %>
   </h3>
+
+  <h3>Average Review</h3>
+  <p>
+    <%= format_average_stars(@movie) %>
+  </p>
   
   <h3>Cast</h3>
   <p>

@@ -16,4 +16,8 @@ module MoviesHelper
     end
   end
 
+  def format_average_stars(movie)
+    "#{movie.average_stars} stars"
+  end
+
 end
