@@ -17,7 +17,12 @@ module MoviesHelper
   end
 
   def format_average_stars(movie)
-    "#{movie.average_stars} stars"
+    stars = movie.average_stars
+    if stars.nil?
+      content_tag(:strong, "No reviews")
+    else
+      pluralize(movie.average_stars, 'star')
+    end
   end
 
 end
