@@ -17,7 +17,6 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to movie_reviews_url(@movie), notice: "Thanks for your review!"
     else
-      flash[:alert] = "error!"
       render :new
     end
   end
