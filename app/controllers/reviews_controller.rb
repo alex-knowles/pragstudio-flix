@@ -15,8 +15,9 @@ class ReviewsController < ApplicationController
     @movie = Movie.find(params[:movie_id])
     @review = @movie.reviews.new(params.require(:review).permit(:name, :stars, :comment))
     if @review.save
-      redirect_to movie_reviews_url(@movie)
+      redirect_to movie_reviews_url(@movie), notice: "Thanks for your review!"
     else
+      flash[:alert] = "error!"
       render :new
     end
   end
