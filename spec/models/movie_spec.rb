@@ -143,4 +143,12 @@ describe "A movie" do
     }.to change(Review, :count).by(-1)
   end
 
+  it "calculates an average star rating of its reviews" do
+    movie = Movie.create(movie_attributes)
+    movie.reviews.create(review_attributes(stars: 1))
+    movie.reviews.create(review_attributes(stars: 5))
+    movie.reviews.create(review_attributes(stars: 3))
+    expect(movie.average_stars).to eq(3)
+  end
+
 end
