@@ -21,7 +21,7 @@ module MoviesHelper
     if stars.nil?
       content_tag(:strong, "No reviews")
     else
-      pluralize(movie.average_stars, 'star')
+      pluralize(number_with_precision(stars, precision: 1), 'star')
     end
   end
 
