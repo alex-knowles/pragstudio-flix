@@ -25,4 +25,18 @@ describe "Viewing a movie" do
     expect(page).to have_text("Flop!")
   end
 
+  it "shows average star rating if there is at least 1 review" do
+    movie = Movie.create(movie_attributes)
+    expected_stars = 2.0
+    movie.reviews.create(review_attributes(stars: expected_stars))
+    visit movie_url(movie)
+    expect(page).to have_text("#{expected_stars} stars")
+  end
+
+  it "shows 'No reviews' if there are 0 reviews" do
+    movie = Movie.create(movie_attributes)
+    visit movie_url(movie)
+    expect(page).to have_text("No reviews")
+  end
+
 end
