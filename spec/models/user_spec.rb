@@ -37,4 +37,11 @@ describe 'A user' do
     expect(user.valid?).to eq(true)
   end
 
+  it 'requires a unique, case-insensitive email address' do
+    user1 = User.create!(user_attributes(email: "user@mail.com"))
+    user2 = User.new(user_attributes(email: "USER@mail.COM"))
+    user2.valid?
+    expect(user2.errors[:email].any?).to eq(true)
+  end
+
 end
