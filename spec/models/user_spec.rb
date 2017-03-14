@@ -32,4 +32,9 @@ describe 'A user' do
     expect(user.errors[:password].any?).to eq(true)
   end
 
+  it 'is valid with example attributes' do
+    user = User.new(user_attributes)
+    expect(user.valid?).to eq(true)
+  end
+
 end
