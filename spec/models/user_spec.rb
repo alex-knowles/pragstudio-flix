@@ -14,9 +14,17 @@ describe 'A user' do
     expect(user.errors[:email].any?).to eq(true)
   end
 
-  it 'accepts an email that is formatted correctly'
+  it 'accepts an email that is formatted correctly' do
+    user = User.new(email: "user@example.com")
+    user.valid?
+    expect(user.errors[:email].any?).to eq(false)
+  end
 
-  it 'rejects an email that is formatted incorrectly'
+  it 'rejects an email that is formatted incorrectly' do
+    user = User.new(email: "user_at_example_dot_com")
+    user.valid?
+    expect(user.errors[:email].any?).to eq(true)
+  end
 
   it 'requires a password' do
     user = User.new(password: "")
