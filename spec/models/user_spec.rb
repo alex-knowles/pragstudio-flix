@@ -18,6 +18,10 @@ describe 'A user' do
 
   it 'rejects an email that is formatted incorrectly'
 
-  it 'requires a password'
+  it 'requires a password' do
+    user = User.new(password: "")
+    user.valid?
+    expect(user.errors[:password].any?).to eq(true)
+  end
 
 end
