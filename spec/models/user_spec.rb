@@ -8,7 +8,11 @@ describe 'A user' do
     expect(user.errors[:name].any?).to eq(true)
   end
 
-  it 'requires an email'
+  it 'requires an email' do
+    user = User.new(email: "")
+    user.valid?
+    expect(user.errors[:email].any?).to eq(true)
+  end
 
   it 'accepts an email that is formatted correctly'
 
