@@ -2,7 +2,11 @@ require 'rails_helper'
 
 describe 'A user' do
 
-  it 'requires a name'
+  it 'requires a name' do
+    user = User.new(name: "")
+    user.valid?
+    expect(user.errors[:name].any?).to eq(true)
+  end
 
   it 'requires an email'
 
