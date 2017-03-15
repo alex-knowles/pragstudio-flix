@@ -38,6 +38,13 @@ describe 'A user' do
     expect(user.errors[:password].any?).to eq(true)
   end
 
+  it 'can be updated without re-submitting the password' do
+    user = User.create!(user_attributes)
+    user2 = User.find_by(email: user.email)
+    expect(user2.password).to be_nil
+    user2.update(name: "")
+  end
+
   it 'is valid with example attributes' do
     user = User.new(user_attributes)
     expect(user.valid?).to eq(true)
