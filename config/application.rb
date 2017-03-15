@@ -24,5 +24,13 @@ module Flix
     console do
       ActiveRecord::Base.connection
     end
+
+    # Disable test file generation for new data models.
+    # Equivalent to using '--no-test-framework' option for
+    # 'rails generate resource <resource> ...' commands.
+    config.generators do |g|
+      g.test_framework = false
+    end
   end
 end
+
