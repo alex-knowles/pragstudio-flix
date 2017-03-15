@@ -15,4 +15,9 @@ describe "Viewing the list of users" do
     expect(page).to have_text(@user3.name)
   end
 
+  it "shows the total number of users" do
+    visit users_url
+    expect(page).to have_text("3 Users")
+  end
+
 end
