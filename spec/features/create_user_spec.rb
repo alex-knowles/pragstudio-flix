@@ -2,6 +2,12 @@ require 'rails_helper'
 
 describe "Creating a user" do
 
+  it "can be navigated to from the root" do
+    visit root_url
+    click_link 'Sign Up'
+    expect(current_path).to eq(signup_path)
+  end
+
   it "succeeds when valid data is submitted"
 
   it "shows the user's details after saving"
