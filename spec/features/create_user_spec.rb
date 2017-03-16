@@ -17,6 +17,7 @@ describe "Creating a user" do
     click_button 'Sign Up'
     expect(User.count).to eq(1)
     expect(current_path).to eq(user_path(User.last))
+    expect(page).to have_text("Thanks for signing up!")
   end
 
   it "fails when invalid data is submitted" do
