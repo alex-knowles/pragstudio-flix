@@ -10,6 +10,18 @@
         <%= f.label :name %>
         <%= f.text_field :name, autofocus: :true %>
       </li>
+      <li class="required">
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+      </li>
+      <li class="required">
+        <%= f.label :password %>
+        <%= f.text_field :password %>
+      </li>
+      <li class="required">
+        <%= f.label :password_confirmation %>
+        <%= f.text_field :password_confirmation %>
+      </li>
     </ol>
     <p>
       <%= f.submit("Sign Up") %>

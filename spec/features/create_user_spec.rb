@@ -8,9 +8,16 @@ describe "Creating a user" do
     expect(current_path).to eq(signup_path)
   end
 
-  it "succeeds when valid data is submitted"
-
-  it "shows the user's details after saving"
+  it "succeeds when valid data is submitted" do
+    visit signup_path
+    fill_in "Name", with: "Anderson Dawes"
+    fill_in "Email", with: "adawes@ceres.net"
+    fill_in "Password", with: "beltersunite"
+    fill_in "Password confirmation", with: "beltersunite"
+    click_button 'Sign Up'
+    expect(User.count).to eq(1)
+    expect(current_path).to eq(user_path(User.last))
+  end
 
   it "fails when invalid data is submitted" do
     visit signup_url
