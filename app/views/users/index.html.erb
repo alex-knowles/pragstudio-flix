@@ -1,12 +1,11 @@
-<ul id="users">
+<header id="content-header">
   <h1> <%= "#{pluralize(@users.count, 'User')}"%> </h1>
+</header>
+
+<ul id="users">
   <% @users.each do |user| %>
     <li>
-      <article class="user">
-        <header>
-          <h2><%= link_to user.name, user %></h2>
-        </header>
-      </article>
+      <%= link_to user.name, user %>
     </li>
   <% end %>
 </ul>
