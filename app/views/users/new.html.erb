@@ -1,0 +1,17 @@
+<header id="content-header">
+  <h1> Sign up a new user </h1>
+</header>
+
+<%= form_for(@user) do |f| %>
+  <fieldset>
+    <ol>
+      <li class="required">
+        <%= f.label :name %>
+        <%= f.text_field :name, autofocus: :true %>
+      </li>
+    </ol>
+    <p>
+      <%= f.submit("Sign Up") %>
+    </p>
+  </fieldset>
+<% end %>
