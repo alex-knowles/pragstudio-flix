@@ -20,4 +20,17 @@ describe "Viewing the list of users" do
     expect(page).to have_text("3 Users")
   end
 
+  context "with exactly 1 user" do
+    before do
+      User.delete_all
+      @user = User.create!(user_attributes)
+    end
+
+    it "shows the total number of users -- singular" do
+      visit users_url
+      expect(page).not_to have_text("1 Users")
+      expect(page).to have_text("1 User")
+    end
+  end
+
 end
