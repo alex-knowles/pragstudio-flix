@@ -18,6 +18,7 @@ describe "Editing a user" do
     expect(current_url).to eq(user_url(user))
     user = User.find(user.id)
     expect(user.name).to eq(valid_name)
+    expect(page).to have_text("Account successfully updated!")
   end
 
   it "fails when invalid data is submitted" do
