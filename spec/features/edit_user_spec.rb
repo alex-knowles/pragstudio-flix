@@ -32,4 +32,29 @@ describe "Editing a user" do
     expect(current_url).to eq(user_url(user))
   end
 
+  context "given a valid new password" do
+    before do
+      @user = User.create!(user_attributes(password: 'anOlderCodeButItChecksOut'))
+      @old_password_digest = @user.password_digest
+      visit edit_user_url(@user)
+      @new_password = 'thisIsMyNewPassword'
+      fill_in "Password", with: @new_password
+      fill_in "Password confirmation", with: @new_password
+    end
+
+    it "does not blank the password field when an invalid name is submitted" do
+      expect(find_field("Password").value).to eq(@new_password)
+      expect(find_field("Password confirmation").value).to eq(@new_password)
+
+      fill_in "Name", with: ""
+      click_button "Update Account"
+      expect(page).to have_text("error")
+      expect(current_url).to eq(user_url(@user))
+      expect(find_field("Password").value).to eq(@new_password)
+      expect(find_field("Password confirmation").value).to eq(@new_password)
+      @user = User.find(@user.id)
+      expect(@user.password_digest).to eq(@old_password_digest)
+    end
+  end
+
 end

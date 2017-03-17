@@ -11,12 +11,13 @@
         <%= f.email_field :email, size: 40 %>
       </li>
       <li>
-        <%= f.label :password %>
-        <%= f.password_field :password, size: 40 %>
+        <%= f.label :password%>
+        <%= f.password_field :password, size: 40, value: @user.password %>
       </li>
       <li>
         <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, size: 40 %>
+        <%= f.password_field :password_confirmation, size: 40,
+          value: @user.password_confirmation %>
       </li>
     </ol>
     <p>
