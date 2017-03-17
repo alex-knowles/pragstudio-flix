@@ -9,6 +9,17 @@ describe "Editing a user" do
     expect(current_url).to eq(edit_user_url(user))
   end
 
+  it "succeeds when valid data is submitted" do
+    user = User.create(user_attributes)
+    visit edit_user_url(user)
+    valid_name = "Walter Sobchak"
+    fill_in "Name", with: valid_name
+    click_button "Update User"
+    expect(current_url).to eq(user_url(user))
+    user = User.find(user.id)
+    expect(user.name).to eq(valid_name)
+  end
+
   it "fails when invalid data is submitted" do
     user = User.create(user_attributes)
     visit edit_user_url(user)
