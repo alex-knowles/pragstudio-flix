@@ -14,7 +14,7 @@ describe "Creating a user" do
     fill_in "Email", with: "adawes@ceres.net"
     fill_in "Password", with: "beltersunite"
     fill_in "Password confirmation", with: "beltersunite"
-    click_button 'Sign Up'
+    click_button 'Create Account'
     expect(User.count).to eq(1)
     expect(current_path).to eq(user_path(User.last))
     expect(page).to have_text("Thanks for signing up!")
@@ -23,7 +23,7 @@ describe "Creating a user" do
   it "fails when invalid data is submitted" do
     visit signup_url
     expect {
-      click_button 'Sign Up'
+      click_button 'Create Account'
     }.not_to change(User, :count)
     expect(page).to have_text('error')
     expect(current_path).to eq(users_path)

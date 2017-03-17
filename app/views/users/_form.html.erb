@@ -20,10 +20,10 @@
       </li>
     </ol>
     <p>
-      <% if @user.id.nil?%>
-        <%= f.submit("Sign Up") %>
+      <% if @user.new_record?%>
+        <%= f.submit("Create Account") %>
       <% else %>
-        <%= f.submit("Update User") %>
+        <%= f.submit("Update Account") %>
       <% end %>
     </p>
   </fieldset>

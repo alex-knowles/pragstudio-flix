@@ -14,7 +14,7 @@ describe "Editing a user" do
     visit edit_user_url(user)
     valid_name = "Walter Sobchak"
     fill_in "Name", with: valid_name
-    click_button "Update User"
+    click_button "Update Account"
     expect(current_url).to eq(user_url(user))
     user = User.find(user.id)
     expect(user.name).to eq(valid_name)
@@ -26,7 +26,7 @@ describe "Editing a user" do
     visit edit_user_url(user)
     invalid_name = ""
     fill_in "Name", with: invalid_name
-    click_button "Update User"
+    click_button "Update Account"
     expect(page).to have_text("error")
     expect(user.name).not_to eq(invalid_name)
     expect(current_url).to eq(user_url(user))
