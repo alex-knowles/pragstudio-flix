@@ -1,3 +1,30 @@
+User.create!([
+  {
+    name: "James Holden",
+    email: "jholden@earth.net",
+    password: "rocinante1",
+    password_confirmation: "rocinante1"
+  },
+  {
+    name: "Naomi Nagata",
+    email: "nnagata@purnkleen.com",
+    password: "opa4evaneva",
+    password_confirmation: "opa4evaneva"
+  },
+  {
+    name: "Amos Burton",
+    email: "aburton@purnkleen.com",
+    password: "nutsandbolts",
+    password_confirmation: "nutsandbolts"
+  },
+  {
+    name: "Alex Kamal",
+    email: "akamal23@mcrn.mil",
+    password: "onthejuice",
+    password_confirmation: "onthejuice"
+  }
+])
+
 Movie.create!([
   {
     title: "Iron Man",
