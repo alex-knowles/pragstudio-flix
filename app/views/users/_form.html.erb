@@ -20,7 +20,11 @@
       </li>
     </ol>
     <p>
-      <%= f.submit("Sign Up") %>
+      <% if @user.id.nil?%>
+        <%= f.submit("Sign Up") %>
+      <% else %>
+        <%= f.submit("Update User") %>
+      <% end %>
     </p>
   </fieldset>
 <% end %>
