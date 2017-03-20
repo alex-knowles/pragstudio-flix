@@ -1,3 +1,16 @@
 <header id="content-id">
   <h1> Sign In </h1>
 </header>
+
+<%= form_tag(new_session_path) do %>
+  <fieldset>
+    <p>
+      <%= label_tag :email %>
+      <%= email_field_tag :email, nil, autofocus: true %>  
+    </p>
+    <p>
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>  
+    </p>
+  </fieldset>
+<% end %>
