@@ -3,7 +3,7 @@
     <h1><%= link_to 'Flix', root_path %></h1>
       <nav>
         <p>
-          <% if !session.nil? && !session[:user_id].nil? %>
+          <% if signed_in %>
             <%= User.find(session[:user_id]).name %>
           <% else %>
             <%= link_to 'Sign Up', signup_path, class: 'button' %>
