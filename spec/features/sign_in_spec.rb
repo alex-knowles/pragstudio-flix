@@ -10,11 +10,6 @@ describe "Signing in" do
     expect(page).to have_field(:password)
   end
 
-  it "has a button to submit email and a password" do
-    visit signin_url
-    expect(page).to have_button("Sign In")
-  end
-
   it "fails when an invalid email/password combination are submitted" do
     user = User.create!(user_attributes(password: "theactualpassword"))
     visit signin_url
