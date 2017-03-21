@@ -4,7 +4,7 @@
       <nav>
         <p>
           <% if signed_in %>
-            <%= User.find(session[:user_id]).name %>
+            <%= current_user.name %>
           <% else %>
             <%= link_to 'Sign Up', signup_path, class: 'button' %>
             <%= link_to 'Sign In', signin_path, class: 'button' %>
