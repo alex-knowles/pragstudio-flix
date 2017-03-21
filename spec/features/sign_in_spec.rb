@@ -20,7 +20,7 @@ describe "Signing in" do
     expect(page).to have_text("Invalid email/password combination.")
 
     visit root_url
-    expect(page).not_to have_text(user.name)
+    expect(page).not_to have_link(user.name)
     expect(page).to have_link("Sign In")
     expect(page).to have_link("Sign Up")
   end
@@ -36,9 +36,12 @@ describe "Signing in" do
     expect(page).to have_text("Welcome back, #{expected_name}!")
 
     visit root_url
-    expect(page).to have_text(user.name)
+    expect(page).to have_link(user.name)
     expect(page).not_to have_link("Sign In")
     expect(page).not_to have_link("Sign Up")
+
+    click_on(user.name)
+    expect(current_path).to eq(user_path(user))
   end
 
 end

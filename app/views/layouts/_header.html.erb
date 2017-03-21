@@ -4,7 +4,7 @@
       <nav>
         <p>
           <% if signed_in %>
-            <%= current_user.name %>
+            <%= link_to current_user.name, current_user %>
           <% else %>
             <%= link_to 'Sign Up', signup_path, class: 'button' %>
             <%= link_to 'Sign In', signin_path, class: 'button' %>
