@@ -15,4 +15,8 @@ describe "Signing in" do
     expect(page).to have_button("Sign In")
   end
 
+  it "fails when an invalid email/password combination are submitted"
+
+  it "succeeds when a valid email/password combination are submitted"
+
 end
