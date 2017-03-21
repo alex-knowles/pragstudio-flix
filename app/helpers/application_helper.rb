@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def current_user
-    User.find(session[:user_id]) if signed_in
+    @user ||= User.find(session[:user_id]) if signed_in
   end
 
 end
