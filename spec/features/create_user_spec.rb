@@ -29,4 +29,17 @@ describe "Creating a user" do
     expect(current_path).to eq(users_path)
   end
 
+  it "automatically signs in the new user" do
+    visit signup_path
+    expected_name = "Anderson Dawes"
+    fill_in "Name", with: expected_name
+    fill_in "Email", with: "adawes@ceres.net"
+    fill_in "Password", with: "beltersunite"
+    fill_in "Password confirmation", with: "beltersunite"
+    click_button 'Create Account'
+
+    visit root_url
+    expect(page).to have_text(expected_name)
+  end
+
 end

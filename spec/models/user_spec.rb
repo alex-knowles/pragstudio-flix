@@ -58,3 +58,24 @@ describe 'A user' do
   end
 
 end
+
+describe 'authenticate' do
+  before do
+    @user = User.create!(user_attributes)
+  end
+
+  it "returns non-true if the email does not match" do
+    result = User.authenticate("not-the-email", @user.password)
+    expect(result).not_to be_truthy
+  end
+
+  it "returns non-true if the password does not match" do
+    result = User.authenticate(@user.email, "not-the-password")
+    expect(result).not_to be_truthy
+  end
+
+  it "returns true if the email and password do match" do
+    result = User.authenticate(@user.email, @user.password)
+    expect(result).to be_truthy
+  end
+end
