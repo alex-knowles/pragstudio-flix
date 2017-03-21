@@ -18,6 +18,11 @@ describe "Signing in" do
     click_button "Sign In"
     expect(current_path).to eq(session_path)
     expect(page).to have_text("Invalid email/password combination.")
+
+    visit root_url
+    expect(page).not_to have_text(user.name)
+    expect(page).to have_link("Sign In")
+    expect(page).to have_link("Sign Up")
   end
 
   it "succeeds when a valid email/password combination are submitted" do
@@ -29,6 +34,11 @@ describe "Signing in" do
     click_button "Sign In"
     expect(current_path).to eq(user_path(user))
     expect(page).to have_text("Welcome back, #{expected_name}!")
+
+    visit root_url
+    expect(page).to have_text(user.name)
+    expect(page).not_to have_link("Sign In")
+    expect(page).not_to have_link("Sign Up")
   end
 
 end
