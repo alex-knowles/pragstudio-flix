@@ -15,7 +15,15 @@ describe "Signing in" do
     expect(page).to have_button("Sign In")
   end
 
-  it "fails when an invalid email/password combination are submitted"
+  it "fails when an invalid email/password combination are submitted" do
+    user = User.create!(user_attributes(password: "theactualpassword"))
+    visit signin_url
+    fill_in :email, with: user.email
+    fill_in :password, with: "nottheactualpassword!?"
+    click_button "Sign In"
+    expect(current_path).to eq(session_path)
+    expect(page).to have_text("Invalid email/password combination.")
+  end
 
   it "succeeds when a valid email/password combination are submitted"
 
