@@ -10,4 +10,9 @@ describe "Signing in" do
     expect(page).to have_field(:password)
   end
 
+  it "has a button to submit email and a password" do
+    visit signin_url
+    expect(page).to have_button("Sign In")
+  end
+
 end
