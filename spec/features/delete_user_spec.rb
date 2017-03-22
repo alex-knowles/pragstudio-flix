@@ -4,6 +4,7 @@ describe "Deleting a user" do
 
   it "deletes the user and shows the root view" do
     user = User.create!(user_attributes)
+    sign_in(user)
     visit user_url(user)
     click_link "Delete Account"
     expect(User.count).to eq(0)
