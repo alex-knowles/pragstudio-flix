@@ -13,10 +13,7 @@ describe "Deleting a user" do
 
   it "signs the user out if signed in" do
     user = User.create!(user_attributes)
-    visit signin_url
-    fill_in :email, with: user.email
-    fill_in :password, with: user.password
-    click_button "Sign In"
+    sign_in(user)
     visit user_url(user)
     click_link "Delete Account"
     expect(page).to have_text("Account deleted successfully")

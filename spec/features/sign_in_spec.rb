@@ -28,10 +28,7 @@ describe "Signing in" do
   it "succeeds when a valid email/password combination are submitted" do
     expected_name = "Gabe Kaplan"
     user = User.create!(user_attributes(name: expected_name))
-    visit signin_url
-    fill_in :email, with: user.email
-    fill_in :password, with: user.password
-    click_button "Sign In"
+    sign_in(user)
     expect(current_path).to eq(user_path(user))
     expect(page).to have_text("Welcome back, #{expected_name}!")
 
