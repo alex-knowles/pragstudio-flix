@@ -19,7 +19,10 @@ describe UsersController do
       expect(response).to redirect_to(signin_url)
     end
 
-    it "cannot access edit"
+    it "cannot access edit" do
+      get :edit, params: { id: @user }
+      expect(response).to redirect_to(signin_url)
+    end
 
     it "cannot access update"
 
