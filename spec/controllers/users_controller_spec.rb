@@ -4,7 +4,12 @@ describe UsersController do
 
   context "when not signed in" do
 
-    it "cannot access index"
+    it "cannot access index" do
+      user = User.create!(user_attributes)
+      session[:user_id] = nil
+      get :index
+      expect(response).to redirect_to(signin_url)
+    end
 
     it "cannot access show"
 
