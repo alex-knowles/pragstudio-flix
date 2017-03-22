@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_signin, only: [:index]
+  before_action :require_signin, only: [:index, :show]
 
   def index
     @users = User.all
