@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Deleting a user" do
 
-  it "deletes the user and shows the user listing without the movie" do
+  it "deletes the user and shows the user listing without the user" do
     user = User.create!(user_attributes)
     visit user_url(user)
     click_link "Delete Account"
