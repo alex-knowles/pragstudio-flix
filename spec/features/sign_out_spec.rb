@@ -16,6 +16,7 @@ describe "Signing out" do
     expect(current_url).to eq(root_url)
     expect(page).not_to have_text(@user.name)
     expect(page).to have_text("Sign In")
+    expect(page).to have_text("You're now signed out!")
   end
 
 end
