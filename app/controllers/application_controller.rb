@@ -9,7 +9,7 @@ private
 
   def require_signin
     unless signed_in
-      redirect_to signin_url
+      redirect_to signin_url, alert: "Please sign in first!" 
     end
   end
 
