@@ -13,5 +13,9 @@ private
     end
   end
 
+  def sign_out
+    session[:user_id] = nil
+  end
+
   helper_method :signed_in
 end
