@@ -26,7 +26,7 @@ private
   end
 
   def sign_out
-    session[:user_id] = nil
+    session.clear
   end
 
 end

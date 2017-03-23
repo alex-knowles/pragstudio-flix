@@ -54,6 +54,16 @@ describe "Signing in" do
       expect(current_url).to eq(@restricted_url)
     end
 
+    it "does not redirect to the restricted view after sign out" do
+      another_user = User.create!(user_attributes(email: "user@another.net"))
+      visit @restricted_url
+      sign_in(@user)
+      click_on "Sign Out"
+      sign_in(another_user)
+      expect(current_url).not_to eq(@restricted_url)
+      expect(current_url).to eq(user_url(another_user))
+    end
+
   end
 
 end

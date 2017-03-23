@@ -9,7 +9,7 @@ describe UsersController do
   context "when not signed in" do
 
     before do
-      session[:user_id] = nil
+      session.clear
     end
 
     it "cannot access index" do
