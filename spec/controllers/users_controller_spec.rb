@@ -36,4 +36,14 @@ describe UsersController do
 
   end
 
+  context "when signed in" do
+
+    it "cannot edit some other user"
+
+    it "cannot update some other user"
+
+    it "cannot destroy some other user"
+
+  end
+
 end
