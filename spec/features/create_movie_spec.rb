@@ -3,6 +3,8 @@ require 'rails_helper'
 describe "Creating a new movie" do
 
   it "saves the movie and shows the new movie's details" do
+    user = User.create!(user_attributes)
+    sign_in(user)
     visit movies_url
     click_link "Add New Movie"
     expect(current_path).to eq(new_movie_path)
@@ -37,6 +39,8 @@ describe "Creating a new movie" do
   end
 
   it "does not save the movie if it's invalid" do
+    user = User.create!(user_attributes)
+    sign_in(user)
     visit new_movie_url
     expect {
         click_button 'Create Movie'
