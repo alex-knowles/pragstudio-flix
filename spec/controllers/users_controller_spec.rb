@@ -24,7 +24,10 @@ describe UsersController do
       expect(response).to redirect_to(signin_url)
     end
 
-    it "cannot access update"
+    it "cannot access update" do
+      patch :update, params: { id: @user, user: user_attributes(password: "") }
+      expect(response).to redirect_to(signin_url)
+    end
 
     it "cannot access show"
 
