@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :require_signin, only: [:index, :show, :edit, :update, :destroy]
+  before_action :require_signin, except: [:new, :create]
 
   def index
     @users = User.all
