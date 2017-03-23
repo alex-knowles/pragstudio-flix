@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     sign_out
-    redirect_to root_url, alert: "Account deleted successfully"
+    redirect_to signup_url, alert: "Account deleted successfully"
   end
 
 private
