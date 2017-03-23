@@ -59,7 +59,10 @@ describe UsersController do
       expect(response).to redirect_to(root_url)
     end
 
-    it "cannot destroy some other user"
+    it "cannot destroy some other user" do
+      delete :destroy, params: { id: @some_other_user }
+      expect(response).to redirect_to(root_url)
+    end
 
   end
 
