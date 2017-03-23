@@ -9,7 +9,7 @@ private
 
 
   def current_user
-    @user ||= User.find(session[:user_id]) if signed_in
+    @current_user ||= User.find(session[:user_id]) if signed_in
   end
 
   def require_signin
