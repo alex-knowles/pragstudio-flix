@@ -2,10 +2,13 @@ require 'rails_helper'
 
 describe UsersController do
 
+  before do
+    @user = User.create!(user_attributes)
+  end
+
   context "when not signed in" do
 
     before do
-      @user = User.create!(user_attributes)
       session[:user_id] = nil
     end
 
@@ -38,7 +41,18 @@ describe UsersController do
 
   context "when signed in" do
 
-    it "cannot edit some other user"
+    before do
+      @some_other_user = User.create!(user_attributes(
+        name: "Dwigt",
+        email: "dwigt@schrute.org"
+      ))
+      session[:user_id] = @user.id
+    end
+
+    it "cannot edit some other user" do
+      get :edit, params: { id: @some_other_user }
+      expect(response).to redirect_to(root_url)
+    end
 
     it "cannot update some other user"
 

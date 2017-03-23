@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :require_signin, except: [:new, :create]
+  before_action :require_correct_user, only: [:edit]
 
   def index
     @users = User.all
@@ -48,6 +49,13 @@ private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def require_correct_user
+    user = User.find(params[:id])
+    unless user == current_user
+      redirect_to root_url
+    end
   end
 
 end
