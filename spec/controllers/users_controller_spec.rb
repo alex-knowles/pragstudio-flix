@@ -29,7 +29,10 @@ describe UsersController do
       expect(response).to redirect_to(signin_url)
     end
 
-    it "cannot access show"
+    it "cannot access destroy" do
+      delete :destroy, params: { id: @user }
+      expect(response).to redirect_to(signin_url)
+    end
 
   end
 
