@@ -50,7 +50,7 @@ private
 
   def require_correct_user
     @user = User.find(params[:id])
-    unless @user == current_user
+    unless current_user?(@user)
       redirect_to root_url
     end
   end

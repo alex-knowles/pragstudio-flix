@@ -6,7 +6,7 @@
 
   <footer>
     <nav>
-      <% if @user == current_user %>
+      <% if current_user?(@user) %>
         <%= link_to 'Edit Account', edit_user_path(@user), class: 'button' %>
         <%= link_to 'Delete Account', @user,
                     class: 'button',

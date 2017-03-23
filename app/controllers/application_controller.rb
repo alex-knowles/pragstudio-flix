@@ -7,9 +7,12 @@ private
     !session.nil? && !session[:user_id].nil?
   end
 
-
   def current_user
     @current_user ||= User.find(session[:user_id]) if signed_in
+  end
+
+  def current_user?(user)
+    current_user == user
   end
 
   def require_signin
@@ -22,5 +25,5 @@ private
     session[:user_id] = nil
   end
 
-  helper_method :signed_in, :current_user
+  helper_method :signed_in, :current_user, :current_user?
 end
