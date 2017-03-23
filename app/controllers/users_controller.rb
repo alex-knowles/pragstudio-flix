@@ -26,11 +26,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to @user, notice: "Account successfully updated!"
     else
@@ -39,7 +37,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     sign_out
     redirect_to signup_url, alert: "Account deleted successfully"
@@ -52,8 +49,8 @@ private
   end
 
   def require_correct_user
-    user = User.find(params[:id])
-    unless user == current_user
+    @user = User.find(params[:id])
+    unless @user == current_user
       redirect_to root_url
     end
   end
