@@ -8,7 +8,11 @@ describe MoviesController do
 
     it "cannot access edit"
 
-    it "cannot access destroy"
+    it "cannot access destroy" do
+      movie = Movie.create!(movie_attributes)
+      delete :destroy, params: { id: movie }
+      expect(response).to redirect_to(signin_url)
+    end
 
   end
 
