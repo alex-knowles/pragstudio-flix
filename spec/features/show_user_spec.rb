@@ -27,4 +27,22 @@ describe "Showing a user" do
 
   end
 
+  context "that is not currently signed in" do
+
+    before do
+      @some_other_user = User.create!(user_attributes(email: "user@some.other"))
+    end
+
+    it "does not show an 'edit' link" do
+      visit user_path @some_other_user
+      expect(page).not_to have_link("Edit Account")
+    end
+
+    it "does not show a 'delete' link" do
+      visit user_path @some_other_user
+      expect(page).not_to have_link("Delete Account")
+    end
+
+  end
+
 end
