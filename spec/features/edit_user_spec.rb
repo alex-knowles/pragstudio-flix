@@ -4,6 +4,7 @@ describe "Editing a user" do
 
   it "can be navigated to from a user's detail view" do
     user = User.create!(user_attributes)
+    sign_in(user)
     visit user_path(user)
     click_on "Edit Account"
     expect(current_url).to eq(edit_user_url(user))
@@ -11,6 +12,7 @@ describe "Editing a user" do
 
   it "succeeds when valid data is submitted" do
     user = User.create(user_attributes)
+    sign_in(user)
     visit edit_user_url(user)
     valid_name = "Walter Sobchak"
     fill_in "Name", with: valid_name
@@ -23,6 +25,7 @@ describe "Editing a user" do
 
   it "fails when invalid data is submitted" do
     user = User.create(user_attributes)
+    sign_in(user)
     visit edit_user_url(user)
     invalid_name = ""
     fill_in "Name", with: invalid_name
@@ -36,6 +39,7 @@ describe "Editing a user" do
     before do
       @user = User.create!(user_attributes(password: 'anOlderCodeButItChecksOut'))
       @old_password_digest = @user.password_digest
+      sign_in(@user)
       visit edit_user_url(@user)
       @new_password = 'thisIsMyNewPassword'
       fill_in "Password", with: @new_password

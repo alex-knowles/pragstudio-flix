@@ -6,6 +6,7 @@ describe "Viewing the list of users" do
     @user1 = User.create!(user_attributes(name: "Alice Smith"))
     @user2 = User.create!(user_attributes(name: "Bob Smith", email: "bob@smith.com"))
     @user3 = User.create!(user_attributes(name: "Charles Smith", email: "charles@smith.com"))
+    sign_in(@user1)
   end
 
   it "shows the users" do
@@ -22,8 +23,10 @@ describe "Viewing the list of users" do
 
   context "with exactly 1 user" do
     before do
+      click_on "Sign Out"
       User.delete_all
       @user = User.create!(user_attributes)
+      sign_in(@user)
     end
 
     it "shows the total number of users -- singular" do
