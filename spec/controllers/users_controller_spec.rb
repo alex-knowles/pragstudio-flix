@@ -54,7 +54,10 @@ describe UsersController do
       expect(response).to redirect_to(root_url)
     end
 
-    it "cannot update some other user"
+    it "cannot update some other user" do
+      patch :update, params: { id: @some_other_user, user: user_attributes(name: "Dwight", password: "") }
+      expect(response).to redirect_to(root_url)
+    end
 
     it "cannot destroy some other user"
 
