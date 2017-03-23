@@ -43,12 +43,15 @@ describe "Signing in" do
 
   context "after being redirected from a view requiring sign-in" do
 
+    before do
+      @user = User.create!(user_attributes)
+      @restricted_url = users_url
+    end
+
     it "redirects to the restricted view" do
-      user = User.create!(user_attributes)
-      restricted_url = users_url
-      visit restricted_url
-      sign_in(user)
-      expect(current_url).to eq(restricted_url)
+      visit @restricted_url
+      sign_in(@user)
+      expect(current_url).to eq(@restricted_url)
     end
 
   end
