@@ -41,4 +41,16 @@ describe "Signing in" do
     expect(current_path).to eq(user_path(user))
   end
 
+  context "after being redirected from a view requiring sign-in" do
+
+    it "redirects to the restricted view" do
+      user = User.create!(user_attributes)
+      restricted_url = users_url
+      visit restricted_url
+      sign_in(user)
+      expect(current_url).to eq(restricted_url)
+    end
+
+  end
+
 end

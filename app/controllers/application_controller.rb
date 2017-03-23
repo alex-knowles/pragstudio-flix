@@ -20,6 +20,7 @@ private
 
   def require_signin
     unless signed_in
+      session[:intended_url] = request.url
       redirect_to signin_url, alert: "Please sign in first!" 
     end
   end
