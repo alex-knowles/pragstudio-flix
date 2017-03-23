@@ -3,12 +3,15 @@ require 'rails_helper'
 describe "Showing a user" do 
 
   before do
+    @edit_link_text = "Edit Account"
+    @delete_link_text = "Delete Account"
+
     @user = User.create!(user_attributes)
     sign_in(@user)
+    visit user_path @user
   end
 
   it "displays its attributes" do
-    visit user_path @user
     expect(page).to have_text(@user.name)
     expect(page).to have_text(@user.email)
   end
@@ -16,13 +19,11 @@ describe "Showing a user" do
   context "that is currently signed in" do
 
     it "shows an 'edit' link" do
-      visit user_path @user
-      expect(page).to have_link("Edit Account")
+      expect(page).to have_link(@edit_link_text)
     end
 
     it "shows a 'delete' link" do
-      visit user_path @user
-      expect(page).to have_link("Delete Account")
+      expect(page).to have_link(@delete_link_text)
     end
 
   end
@@ -31,16 +32,15 @@ describe "Showing a user" do
 
     before do
       @some_other_user = User.create!(user_attributes(email: "user@some.other"))
+      visit user_path @some_other_user
     end
 
     it "does not show an 'edit' link" do
-      visit user_path @some_other_user
-      expect(page).not_to have_link("Edit Account")
+      expect(page).not_to have_link(@edit_link_text)
     end
 
     it "does not show a 'delete' link" do
-      visit user_path @some_other_user
-      expect(page).not_to have_link("Delete Account")
+      expect(page).not_to have_link(@delete_link_text)
     end
 
   end
