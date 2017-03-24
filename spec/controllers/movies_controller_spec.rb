@@ -8,7 +8,10 @@ describe MoviesController do
       @movie = Movie.create!(movie_attributes)
     end
 
-    it "cannot access new"
+    it "cannot access new" do
+      get :new
+      expect(response).to redirect_to(signin_url)
+    end
 
     it "cannot access create" do
       post :create, params: { movie: movie_attributes }

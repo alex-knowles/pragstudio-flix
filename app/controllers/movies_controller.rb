@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :require_signin, only: [:create, :edit, :destroy]
+  before_action :require_signin, only: [:new, :create, :edit, :destroy]
 
   def index
     @movies = Movie.released
