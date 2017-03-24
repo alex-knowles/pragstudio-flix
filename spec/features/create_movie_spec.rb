@@ -2,6 +2,11 @@ require 'rails_helper'
 
 describe "Creating a new movie" do
 
+  before do
+    user = User.create!(user_attributes(admin: true))
+    sign_in(user)
+  end
+
   it "saves the movie and shows the new movie's details" do
     visit movies_url
     click_link "Add New Movie"
@@ -43,6 +48,6 @@ describe "Creating a new movie" do
     }.not_to change(Movie, :count)
     expect(current_path).to eq(movies_path)
     expect(page).to have_text('error')
-  end
+    end
 
 end

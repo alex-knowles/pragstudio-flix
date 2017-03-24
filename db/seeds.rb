@@ -2,6 +2,7 @@ User.create!([
   {
     name: "James Holden",
     email: "jholden@earth.net",
+    admin: true,
     password: "rocinante1",
     password_confirmation: "rocinante1"
   },
