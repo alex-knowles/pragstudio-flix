@@ -71,7 +71,10 @@ describe MoviesController do
       expect(response).to redirect_to(@expected_url)
     end
 
-    it "cannot access destroy"
+    it "cannot access destroy" do
+      delete :destroy, params: { id: @movie }
+      expect(response).to redirect_to(@expected_url)
+    end
 
   end
 
