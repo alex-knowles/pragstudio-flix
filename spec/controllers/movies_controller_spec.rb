@@ -8,6 +8,8 @@ describe MoviesController do
       @movie = Movie.create!(movie_attributes)
     end
 
+    it "cannot access new"
+
     it "cannot access create" do
       post :create, params: { movie: movie_attributes }
       expect(response).to redirect_to(signin_url)
@@ -18,6 +20,8 @@ describe MoviesController do
       expect(response).to redirect_to(signin_url)
     end
 
+    it "cannot access update"
+
     it "cannot access destroy" do
       delete :destroy, params: { id: @movie }
       expect(response).to redirect_to(signin_url)
@@ -27,9 +31,13 @@ describe MoviesController do
 
   context "when signed in as a non-admin" do
 
+    it "cannot access new"
+
     it "cannot access create"
 
     it "cannot access edit"
+
+    it "cannot access update"
 
     it "cannot access destroy"
 
