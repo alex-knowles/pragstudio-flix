@@ -6,21 +6,22 @@ describe MoviesController do
 
     before do
       @movie = Movie.create!(movie_attributes)
+      @expected_url = signin_url
     end
 
     it "cannot access new" do
       get :new
-      expect(response).to redirect_to(signin_url)
+      expect(response).to redirect_to(@expected_url)
     end
 
     it "cannot access create" do
       post :create, params: { movie: movie_attributes }
-      expect(response).to redirect_to(signin_url)
+      expect(response).to redirect_to(@expected_url)
     end
 
     it "cannot access edit" do
       get :edit, params: { id: @movie }
-      expect(response).to redirect_to(signin_url)
+      expect(response).to redirect_to(@expected_url)
     end
 
     it "cannot access update" do
@@ -28,12 +29,12 @@ describe MoviesController do
         id: @movie,
         movie: movie_attributes(title: "Foo Bar 2")
       }
-      expect(response).to redirect_to(signin_url)
+      expect(response).to redirect_to(@expected_url)
     end
 
     it "cannot access destroy" do
       delete :destroy, params: { id: @movie }
-      expect(response).to redirect_to(signin_url)
+      expect(response).to redirect_to(@expected_url)
     end
 
   end
@@ -44,21 +45,22 @@ describe MoviesController do
       @movie = Movie.create!(movie_attributes)
       user = User.create!(user_attributes)
       session[:user_id] = user.id
+      @expected_url = root_url
     end
 
     it "cannot access new" do
       get :new
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(@expected_url)
     end
 
     it "cannot access create" do
       post :create, params: { movie: movie_attributes }
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(@expected_url)
     end
 
     it "cannot access edit" do
       get :edit, params: { id: @movie }
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(@expected_url)
     end
 
     it "cannot access update" do
@@ -66,7 +68,7 @@ describe MoviesController do
         id: @movie,
         movie: movie_attributes(title: "Foo Bar 2")
       }
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(@expected_url)
     end
 
     it "cannot access destroy"
