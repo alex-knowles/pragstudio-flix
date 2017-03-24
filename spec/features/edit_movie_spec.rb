@@ -3,7 +3,7 @@ require 'rails_helper'
 describe "Editing a movie" do
 
   before do
-    @user = User.create(user_attributes)
+    @user = User.create(user_attributes(admin: true))
     sign_in(@user)
   end
   

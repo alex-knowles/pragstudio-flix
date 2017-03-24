@@ -24,7 +24,7 @@ describe MoviesController do
     end
 
     it "cannot access update" do
-      post :update, params: { 
+      post :update, params: {
         id: @movie,
         movie: movie_attributes(title: "Foo Bar 2")
       }
@@ -41,6 +41,7 @@ describe MoviesController do
   context "when signed in as a non-admin" do
 
     before do
+      @movie = Movie.create!(movie_attributes)
       user = User.create!(user_attributes)
       session[:user_id] = user.id
     end
@@ -55,9 +56,18 @@ describe MoviesController do
       expect(response).to redirect_to(root_url)
     end
 
-    it "cannot access edit"
+    it "cannot access edit" do
+      get :edit, params: { id: @movie }
+      expect(response).to redirect_to(root_url)
+    end
 
-    it "cannot access update"
+    it "cannot access update" do
+      patch :update, params: {
+        id: @movie,
+        movie: movie_attributes(title: "Foo Bar 2")
+      }
+      expect(response).to redirect_to(root_url)
+    end
 
     it "cannot access destroy"
 
