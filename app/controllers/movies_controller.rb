@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   before_action :require_signin, except: [:index, :show]
-  before_action :require_admin, only: [:new]
+  before_action :require_admin, only: [:new, :create]
 
   def index
     @movies = Movie.released

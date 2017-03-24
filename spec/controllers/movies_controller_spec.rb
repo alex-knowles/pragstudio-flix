@@ -50,7 +50,10 @@ describe MoviesController do
       expect(response).to redirect_to(root_url)
     end
 
-    it "cannot access create"
+    it "cannot access create" do
+      post :create, params: { movie: movie_attributes }
+      expect(response).to redirect_to(root_url)
+    end
 
     it "cannot access edit"
 
