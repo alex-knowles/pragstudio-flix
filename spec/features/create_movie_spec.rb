@@ -30,6 +30,19 @@ describe "Creating a new movie" do
       expect(page).to have_text("Movie created successfully!")
     end
 
+    it "has 'Cancel' link that returns to the index page without changing anything" do
+      expect(Movie.count).to eq(0)
+      visit movies_url
+      click_link "Add New Movie"
+
+      canceled_title = "New Movie Title"
+      fill_in 'Title', with: canceled_title
+      click_link 'Cancel'
+      expect(current_path).to eq(movies_path)
+      expect(Movie.count).to eq(0)
+      expect(page).not_to have_text(canceled_title)
+    end
+
     it "does not save the movie if it's invalid" do
       visit new_movie_url
       expect {
@@ -39,19 +52,6 @@ describe "Creating a new movie" do
       expect(page).to have_text('error')
     end
 
-  end
-
-  it "has 'Cancel' link that returns to the index page without changing anything" do
-    expect(Movie.count).to eq(0)
-    visit movies_url
-    click_link "Add New Movie"
-
-    canceled_title = "New Movie Title"
-    fill_in 'Title', with: canceled_title
-    click_link 'Cancel'
-    expect(current_path).to eq(movies_path)
-    expect(Movie.count).to eq(0)
-    expect(page).not_to have_text(canceled_title)
   end
 
 end

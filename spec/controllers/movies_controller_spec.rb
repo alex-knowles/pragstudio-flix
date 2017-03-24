@@ -23,7 +23,13 @@ describe MoviesController do
       expect(response).to redirect_to(signin_url)
     end
 
-    it "cannot access update"
+    it "cannot access update" do
+      post :update, params: { 
+        id: @movie,
+        movie: movie_attributes(title: "Foo Bar 2")
+      }
+      expect(response).to redirect_to(signin_url)
+    end
 
     it "cannot access destroy" do
       delete :destroy, params: { id: @movie }
