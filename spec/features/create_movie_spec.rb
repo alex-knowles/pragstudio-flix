@@ -4,9 +4,12 @@ describe "Creating a new movie" do
 
   context "while signed in" do
 
-    it "saves the movie and shows the new movie's details" do
+    before do
       user = User.create!(user_attributes)
       sign_in(user)
+    end
+
+    it "saves the movie and shows the new movie's details" do
       visit movies_url
       click_link "Add New Movie"
       expect(current_path).to eq(new_movie_path)
@@ -28,8 +31,6 @@ describe "Creating a new movie" do
     end
 
     it "does not save the movie if it's invalid" do
-      user = User.create!(user_attributes)
-      sign_in(user)
       visit new_movie_url
       expect {
           click_button 'Create Movie'
