@@ -5,7 +5,7 @@ describe "Creating a new movie" do
   context "while signed in" do
 
     before do
-      user = User.create!(user_attributes)
+      user = User.create!(user_attributes(admin: true))
       sign_in(user)
     end
 

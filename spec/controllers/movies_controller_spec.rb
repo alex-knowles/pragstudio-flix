@@ -40,7 +40,15 @@ describe MoviesController do
 
   context "when signed in as a non-admin" do
 
-    it "cannot access new"
+    before do
+      user = User.create!(user_attributes)
+      session[:user_id] = user.id
+    end
+
+    it "cannot access new" do
+      get :new
+      expect(response).to redirect_to(root_url)
+    end
 
     it "cannot access create"
 
