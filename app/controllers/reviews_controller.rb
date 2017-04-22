@@ -11,7 +11,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = @movie.reviews.new(params.require(:review).permit(:name, :stars, :comment))
+    @review = @movie.reviews.new(params.require(:review).permit(:stars, :comment))
     if @review.save
       redirect_to movie_reviews_url(@movie), notice: "Thanks for your review!"
     else
