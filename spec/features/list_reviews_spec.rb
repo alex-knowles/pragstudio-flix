@@ -2,7 +2,12 @@ require 'rails_helper'
 
 describe "Viewing a list of reviews" do
 
-  it "shows the reiews for a specific movie" do
+  before do
+    user = User.create!(user_attributes)
+    sign_in(user)
+  end
+
+  it "shows the reviews for a specific movie" do
     movie1 = Movie.create(movie_attributes(title: "Iron Man"))
     review1 = movie1.reviews.create(review_attributes(name: "Roger Ebert"))
     review2 = movie1.reviews.create(review_attributes(name: "Gene Siskel"))
