@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
-
   before_action :set_movie
+  before_action :require_signin, only: [:index, :new, :create]
 
   def index
     @reviews = Review.where(movie_id: @movie.id).order("created_at desc")
