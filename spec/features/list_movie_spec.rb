@@ -26,9 +26,10 @@ describe "Viewing a movie" do
   end
 
   it "shows average star rating if there is at least 1 review" do
-    movie = Movie.create(movie_attributes)
+    movie = Movie.create!(movie_attributes)
+    user = User.create!(user_attributes)
     expected_stars = 2.0
-    movie.reviews.create(review_attributes(stars: expected_stars))
+    movie.reviews.create!(review_attributes(stars: expected_stars, user: user))
     visit movie_url(movie)
     expect(page).to have_text("#{expected_stars} stars")
   end
