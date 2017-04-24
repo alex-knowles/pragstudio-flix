@@ -4,6 +4,19 @@
     <h2> <%= mail_to(@user.email) %> </h2>
   </header>
 
+  <ul>
+    <% @reviews.each do |review| %>
+      <li>
+        <span><%= link_to review.movie.title, review.movie %></span>
+        <span><%= pluralize(review.stars, "star") %></span>>
+        <span><%= time_ago_in_words(review.created_at) %> ago</span>
+        <p>
+          <%= review.comment %>
+        </p>
+      </li>
+    <% end %>
+  </ul>
+
   <footer>
     <nav>
       <% if current_user?(@user) %>
