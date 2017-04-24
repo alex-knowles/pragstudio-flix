@@ -4,18 +4,19 @@
     <h2> <%= mail_to(@user.email) %> </h2>
   </header>
 
-  <ul>
+  <ol id="reviews">
+    <h3>Reviews</h3>
     <% @reviews.each do |review| %>
       <li>
-        <span><%= link_to review.movie.title, review.movie %></span>
-        <span><%= pluralize(review.stars, "star") %></span>>
-        <span><%= time_ago_in_words(review.created_at) %> ago</span>
+        <%= link_to review.movie.title, review.movie %>
+        <span class="review"><%= pluralize(review.stars, "star") %></span>
+        <span class="date"><%= time_ago_in_words(review.created_at) %> ago</span>
         <p>
-          <%= review.comment %>
+          &quot;<%= review.comment %>&quot;
         </p>
       </li>
     <% end %>
-  </ul>
+  </ol>
 
   <footer>
     <nav>
