@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
-
   before_action :set_movie
+  before_action :require_signin, only: [:index, :new, :create]
 
   def index
     @reviews = Review.where(movie_id: @movie.id).order("created_at desc")
@@ -11,7 +11,8 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = @movie.reviews.new(params.require(:review).permit(:name, :stars, :comment))
+    @review = @movie.reviews.new(params.require(:review).permit(:stars, :comment))
+    @review.user = current_user
     if @review.save
       redirect_to movie_reviews_url(@movie), notice: "Thanks for your review!"
     else

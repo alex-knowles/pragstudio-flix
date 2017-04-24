@@ -57,6 +57,24 @@ describe 'A user' do
     expect(user2.errors[:email].any?).to eq(true)
   end
 
+  it "has many reviews" do
+    user = User.new(user_attributes)
+    review1 = user.reviews.new(review_attributes)
+    review2 = user.reviews.new(review_attributes)
+    expect(user.reviews).to include(review1)
+    expect(user.reviews).to include(review2)
+  end
+
+  it "deletes associated reviews" do
+    user = User.create(user_attributes)
+    review = user.reviews.new(review_attributes)
+    review.movie = Movie.create(movie_attributes)
+    review.save
+    expect {
+      user.destroy
+    }.to change(Review, :count).by(-1)
+  end
+
 end
 
 describe 'authenticate' do

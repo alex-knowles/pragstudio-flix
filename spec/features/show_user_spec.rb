@@ -16,6 +16,22 @@ describe "Showing a user" do
     expect(page).to have_text(@user.email)
   end
 
+  it "displays its reviews" do
+    movie1 = Movie.create!(movie_attributes(title: "Movie 1"))
+    movie2 = Movie.create!(movie_attributes(title: "Movie 2"))
+    review1 = movie1.reviews.create!(review_attributes(user: @user, stars: 1))
+    review2 = movie2.reviews.create!(review_attributes(user: @user, stars: 3))
+    visit user_path @user
+
+    expect(page).to have_link(movie1.title)
+    expect(page).to have_text("1 star")
+    expect(page).to have_text(review1.comment)
+
+    expect(page).to have_link(movie2.title)
+    expect(page).to have_text("3 stars")
+    expect(page).to have_text(review2.comment)
+  end
+
   context "that is currently signed in" do
 
     it "shows an 'edit' link" do

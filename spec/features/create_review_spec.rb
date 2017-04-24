@@ -2,13 +2,17 @@ require 'rails_helper'
 
 describe "Creating a review" do
 
+  before do
+    user = User.create!(user_attributes)
+    sign_in(user)
+  end
+
   it "saves the review" do
     movie = Movie.create(movie_attributes)
     visit movie_url(movie)
     click_link "Write Review"
     expect(current_path).to eq(new_movie_review_path(movie))
 
-    fill_in "Name", with: "Roger Ebert"
     # select 3, :from => "review_stars"
     choose "review_stars_3"
     fill_in "Comment", with: "I laughed, I cried, I spilled my popcorn!"
