@@ -94,6 +94,16 @@ describe 'A user' do
     }.to change(Favorite, :count).by(-1)
   end
 
+  it "has many favorite_movies" do
+    user = User.new(user_attributes)
+    favorite_movie1 = Movie.new(movie_attributes)
+    favorite_movie2 = Movie.new(movie_attributes)
+    user.favorites.new(movie: favorite_movie1)
+    user.favorites.new(movie: favorite_movie2)
+    expect(user.favorite_movies).to include(favorite_movie1)
+    expect(user.favorite_movies).to include(favorite_movie2)
+  end
+
 end
 
 describe 'authenticate' do
