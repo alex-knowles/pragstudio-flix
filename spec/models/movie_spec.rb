@@ -153,4 +153,23 @@ describe "A movie" do
     expect(movie.average_stars).to eq(3)
   end
 
+  it "has many favorites" do
+    movie = Movie.new(movie_attributes)
+    user1 = User.new(user_attributes)
+    user2 = User.new(user_attributes)
+    favorite1 = movie.favorites.new(user: user1)
+    favorite2 = movie.favorites.new(user: user2)
+    expect(movie.favorites).to include(favorite1)
+    expect(movie.favorites).to include(favorite2)
+  end
+
+  it "deletes associated favorites" do
+    movie = Movie.create!(movie_attributes)
+    user = User.create!(user_attributes)
+    movie.favorites.create!(user: user)
+    expect {
+      movie.destroy
+    }.to change(Favorite, :count).by(-1)
+  end
+
 end
