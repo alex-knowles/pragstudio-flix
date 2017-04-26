@@ -75,6 +75,25 @@ describe 'A user' do
     }.to change(Review, :count).by(-1)
   end
 
+  it "has many favorites" do
+    user = User.new(user_attributes)
+    movie1 = Movie.new(movie_attributes)
+    movie2 = Movie.new(movie_attributes)
+    favorite1 = user.favorites.new(movie: movie1)
+    favorite2 = user.favorites.new(movie: movie2)
+    expect(user.favorites).to include(favorite1)
+    expect(user.favorites).to include(favorite2)
+  end
+
+  it "deletes associated favorites" do
+    user = User.create!(user_attributes)
+    movie = Movie.create!(movie_attributes)
+    user.favorites.create!(movie: movie)
+    expect {
+      user.destroy
+    }.to change(Favorite, :count).by(-1)
+  end
+
 end
 
 describe 'authenticate' do
