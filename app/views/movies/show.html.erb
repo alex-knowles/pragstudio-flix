@@ -16,6 +16,11 @@
   <p>
     <%= pluralize @fans.count, "fan" %>
   </p>
+
+  <% if signed_in %>
+    <%= button_to "Fave", movie_favorites_path(@movie) %>
+  <% end %>
+
   <% if @fans.any? %>
     <h3>Fans</h3>
     <ul>
