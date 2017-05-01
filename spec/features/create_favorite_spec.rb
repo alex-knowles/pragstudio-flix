@@ -15,6 +15,12 @@ describe 'Fave-ing a movie' do
     }.to change(movie.fans, :count).by(1)
   end
 
-  it "replaces the 'Fave' button with 'Unfave'"
+  it "replaces the 'Fave' button with 'Unfave'" do
+    movie = Movie.create!(movie_attributes)
+    visit movie_url(movie)
+    expect(page).not_to have_button("Unfave")
+    click_button("Fave")
+    expect(page).to have_button("Unfave")
+  end
 
 end
