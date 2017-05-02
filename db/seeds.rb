@@ -72,3 +72,10 @@ Movie.create!([
     image_file_name: "catwoman.jpg"
   }
 ])
+
+Movie.first.fans << User.first
+Movie.first.fans << User.third
+Movie.first.fans << User.fourth
+Movie.third.fans << User.first
+Movie.third.fans << User.second
+Movie.fourth.fans << User.fourth
