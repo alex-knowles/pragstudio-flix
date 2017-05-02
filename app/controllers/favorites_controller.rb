@@ -8,6 +8,10 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
+    @favorite = Favorite.find(params[:id])
+    @movie = Movie.find(params[:movie_id])
+    @favorite.destroy!
+    redirect_to(@movie, notice: "Sorry!")
   end
 
 end
