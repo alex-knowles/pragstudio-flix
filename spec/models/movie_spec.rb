@@ -182,4 +182,14 @@ describe "A movie" do
     expect(movie.fans).to include(fan2)
   end
 
+  it "has many genres" do
+    movie = Movie.new(movie_attributes)
+    genre1 = Genre.new(name: "Comedy")
+    genre2 = Genre.new(name: "Horror")
+    movie.genres << genre1
+    movie.genres << genre2
+    expect(movie.genres).to include(genre1)
+    expect(movie.genres).to include(genre2)
+  end
+
 end

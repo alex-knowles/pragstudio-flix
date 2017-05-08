@@ -15,4 +15,14 @@ describe "A genre" do
     expect(genre2.errors[:name].any?).to eq(true)
   end
 
+  it "has many movies" do
+    genre = Genre.new(name: "Drama")
+    movie1 = Movie.new(movie_attributes)
+    movie2 = Movie.new(movie_attributes)
+    genre.movies << movie1
+    genre.movies << movie2
+    expect(genre.movies).to include(movie1)
+    expect(genre.movies).to include(movie2)
+  end
+
 end
