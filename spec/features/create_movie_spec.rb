@@ -48,6 +48,6 @@ describe "Creating a new movie" do
     }.not_to change(Movie, :count)
     expect(current_path).to eq(movies_path)
     expect(page).to have_text('error')
-    end
+  end
 
 end
