@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
     if (signed_in)
       @current_favorite = current_user.favorites.find_by(movie: @movie)
     end
+    @genres = @movie.genres
   end
 
   def edit
