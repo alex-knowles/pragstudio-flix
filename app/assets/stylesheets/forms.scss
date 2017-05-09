@@ -45,6 +45,12 @@ fieldset {
     border: 1px solid $subdued-color;
   }
   
+  input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    float: left;
+  }
+
   div.field_with_errors {
     display: inline;
     label {
