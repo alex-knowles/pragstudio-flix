@@ -79,3 +79,14 @@ Movie.first.fans << User.fourth
 Movie.third.fans << User.first
 Movie.third.fans << User.second
 Movie.fourth.fans << User.fourth
+
+Genre.create!(name: "Action")
+Genre.create!(name: "Comedy")
+Genre.create!(name: "Drama")
+Genre.create!(name: "Romance")
+Genre.create!(name: "Thriller")
+Genre.create!(name: "Fantasy")
+Genre.create!(name: "Documentary")
+Genre.create!(name: "Adventure")
+Genre.create!(name: "Animation")
+Genre.create!(name: "Sci-Fi")
