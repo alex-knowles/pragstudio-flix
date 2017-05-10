@@ -26,15 +26,17 @@
     <% end %>
   <% end %>
 
-  <% if @fans.any? %>
-    <h3>Fans</h3>
-    <ul>
-      <% @fans.each do |fan| %>
-        <li>
-          <%= link_to fan.name, fan %>
-        </li>
-      <% end %>
-    </ul>
+  <% content_for :side do %>
+    <% if @fans.any? %>
+      <h3>Fans</h3>
+      <ul>
+        <% @fans.each do |fan| %>
+          <li>
+            <%= link_to fan.name, fan %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
   <% end %>
 
   <h3>Average Review</h3>
