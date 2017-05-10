@@ -44,13 +44,15 @@
     <%= format_average_stars(@movie) %>
   </p>
 
-  <% if @genres.any? %>
-    <h3>Genres</h3>
-    <ul>
-      <% @genres.each do |genre| %>
-        <li><%= genre.name %></li>
-      <% end %>
-    </ul>
+  <% content_for :side do %>
+    <% if @genres.any? %>
+      <h3>Genres</h3>
+      <ul>
+        <% @genres.each do |genre| %>
+          <li><%= genre.name %></li>
+        <% end %>
+      </ul>
+    <% end %>
   <% end %>
 
   <h3>Cast</h3>

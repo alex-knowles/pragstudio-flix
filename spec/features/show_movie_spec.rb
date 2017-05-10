@@ -15,4 +15,13 @@ describe 'Showing a movie' do
     end
   end
 
+  it 'displays genres in the sidebar' do
+    genre = Genre.create!(name: 'A Genre')
+    @movie.genres << genre
+    visit movie_url(@movie)
+    within("aside#sidebar") do
+      expect(page).to have_text(genre.name)
+    end
+  end
+
 end
