@@ -41,6 +41,10 @@ describe "Showing a user" do
     end
   end
 
+  it "appends the user's name to the page title" do
+    expect(page).to have_title("Flix - #{@user.name}")
+  end
+
   context "that is currently signed in" do
 
     it "shows an 'edit' link" do
