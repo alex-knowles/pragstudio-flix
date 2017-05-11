@@ -1,19 +1,10 @@
+<% content_for(:title, @user.name) %>
+
 <article id="user">
   <header id="content-header">
     <h1> <%= @user.name %> </h1>
     <h2> <%= mail_to(@user.email) %> </h2>
   </header>
-
-  <% if @favorite_movies.any? %>
-    <h3>Favorite Movies</h3>
-      <ul>
-        <% @favorite_movies.each do |favorite_movie| %>
-          <li>
-            <%= link_to favorite_movie.title, favorite_movie %>
-          </li>
-        <% end %>
-      </ul>
-  <% end %>
 
   <% if @reviews.any? %>
     <ol id="reviews">
@@ -42,3 +33,16 @@
     </nav>
   </footer>
 </article>
+
+<% content_for :side do %>
+  <% if @favorite_movies.any? %>
+    <h3>Favorite Movies</h3>
+      <ul>
+        <% @favorite_movies.each do |favorite_movie| %>
+          <li>
+            <%= link_to favorite_movie.title, favorite_movie %>
+          </li>
+        <% end %>
+      </ul>
+  <% end %>
+<% end %>
