@@ -24,4 +24,9 @@ describe 'Showing a movie' do
     end
   end
 
+  it "appends the movie's title to the page title" do
+    visit movie_url(@movie)
+    expect(page).to have_title("Flix - #{@movie.title}")
+  end
+
 end
