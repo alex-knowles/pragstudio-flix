@@ -32,6 +32,15 @@ describe "Showing a user" do
     expect(page).to have_text(review2.comment)
   end
 
+  it "displays its favorites in the sidebar" do
+    movie = Movie.create!(movie_attributes)
+    @user.favorite_movies << movie
+    visit user_path @user
+    within("aside#sidebar") do
+      expect(page).to have_text(movie.title)
+    end
+  end
+
   context "that is currently signed in" do
 
     it "shows an 'edit' link" do

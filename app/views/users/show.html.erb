@@ -4,17 +4,6 @@
     <h2> <%= mail_to(@user.email) %> </h2>
   </header>
 
-  <% if @favorite_movies.any? %>
-    <h3>Favorite Movies</h3>
-      <ul>
-        <% @favorite_movies.each do |favorite_movie| %>
-          <li>
-            <%= link_to favorite_movie.title, favorite_movie %>
-          </li>
-        <% end %>
-      </ul>
-  <% end %>
-
   <% if @reviews.any? %>
     <ol id="reviews">
       <h3>Reviews</h3>
@@ -42,3 +31,16 @@
     </nav>
   </footer>
 </article>
+
+<% content_for :side do %>
+  <% if @favorite_movies.any? %>
+    <h3>Favorite Movies</h3>
+      <ul>
+        <% @favorite_movies.each do |favorite_movie| %>
+          <li>
+            <%= link_to favorite_movie.title, favorite_movie %>
+          </li>
+        <% end %>
+      </ul>
+  <% end %>
+<% end %>
