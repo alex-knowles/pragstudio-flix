@@ -25,4 +25,8 @@ module MoviesHelper
     end
   end
 
+  def page_title_for(movie)
+    "#{movie.title} (#{movie.released_on.year})"
+  end
+
 end

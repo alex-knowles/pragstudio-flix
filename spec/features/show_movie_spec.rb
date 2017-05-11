@@ -58,9 +58,10 @@ describe 'Showing a movie' do
     end
   end
 
-  it "appends the movie's title to the page title" do
+  it "appends the movie's title and release year to the page title" do
+    @movie = Movie.create!(movie_attributes(title: "The Matrix", released_on: "1999-03-21"))
     visit movie_url(@movie)
-    expect(page).to have_title("Flix - #{@movie.title}")
+    expect(page).to have_title("Flix - The Matrix (1999)")
   end
 
 end
