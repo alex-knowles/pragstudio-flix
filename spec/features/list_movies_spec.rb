@@ -40,4 +40,10 @@ describe "Viewing the list of movies" do
     expect(page).not_to have_text(unreleased_title)
   end
 
+  it "doesn't append anything to the page title" do
+    visit movies_url
+    expect(page).to have_title("Flix")
+    expect(page).not_to have_title("-")
+  end
+
 end
