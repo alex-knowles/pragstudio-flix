@@ -20,9 +20,7 @@ class Movie < ApplicationRecord
     total_gross.blank? || total_gross < 50000000
   end
 
-  def self.released
-    where("released_on <= ?", Date.today).order(released_on: :desc)
-  end
+  scope :released, -> { where("released_on <= ?", Date.today).order(released_on: :desc) }
 
   def average_stars
     reviews.average(:stars)
