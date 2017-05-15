@@ -62,7 +62,9 @@ describe "A movie" do
       expect(Movie.flops).to eq([@flop1, @flop2, @flop3])
     end
 
-    it "returns 'hit' movies ordered with the highest-grossing first"
+    it "returns 'hit' movies ordered with the highest-grossing first" do
+      expect(Movie.hits).to eq([@hit3, @hit2, @hit1])
+    end
   end
 
   it "requires a title" do
