@@ -32,6 +32,39 @@ describe "A movie" do
     expect(Movie.released).to eq([movie3, movie2, movie1])
   end
 
+  context "given a varied range of grossing movies" do
+    before do
+      # flops gross less than $50 million
+      fifty_million = 50000000
+      @flop1 = Movie.new(movie_attributes(total_gross: fifty_million - 3))
+      @flop2 = Movie.new(movie_attributes(total_gross: fifty_million - 2))
+      @flop3 = Movie.new(movie_attributes(total_gross: fifty_million - 1))
+      @flop2.save
+      @flop1.save
+      @flop3.save
+
+      # hits gross more $300 million or more
+      three_hundred_million = 300000000
+      @hit1 = Movie.new(movie_attributes(total_gross: three_hundred_million + 0))
+      @hit2 = Movie.new(movie_attributes(total_gross: three_hundred_million + 1))
+      @hit3 = Movie.new(movie_attributes(total_gross: three_hundred_million + 2))
+      @hit2.save
+      @hit1.save
+      @hit3.save
+
+      # some movies are neither hits nor flops
+      @middling1 = Movie.create!(movie_attributes(total_gross: fifty_million + 0))
+      @middling2 = Movie.create!(movie_attributes(total_gross: fifty_million + 1))
+      @middling3 = Movie.create!(movie_attributes(total_gross: fifty_million + 2))
+    end
+
+    it "returns 'flop' movies ordered with the lowest-grossing first" do
+      expect(Movie.flops).to eq([@flop1, @flop2, @flop3])
+    end
+
+    it "returns 'hit' movies ordered with the highest-grossing first"
+  end
+
   it "requires a title" do
     movie = Movie.new(title: "")
     movie.valid?
