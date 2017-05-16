@@ -32,6 +32,11 @@ describe "A movie" do
     expect(Movie.released).to eq([movie3, movie2, movie1])
   end
 
+  it "is 'upcoming' when the released on date is in the future" do
+    movie = Movie.create!(movie_attributes(released_on: Date.tomorrow))
+    expect(Movie.upcoming).to include(movie)
+  end
+
   context "given a varied range of grossing movies" do
     before do
       # flops gross less than $50 million

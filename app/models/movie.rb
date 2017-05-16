@@ -21,6 +21,7 @@ class Movie < ApplicationRecord
   end
 
   scope :released, -> { where("released_on <= ?", Date.today).order(released_on: :desc) }
+  scope :upcoming, -> { where("released_on > ?", Date.today) }
   scope :flops, -> { released.where("total_gross < 50000000").order(total_gross: :asc) }
   scope :hits, -> { released.where("total_gross >= 300000000").order(total_gross: :desc) }
 
