@@ -37,6 +37,16 @@ describe "A movie" do
     expect(Movie.upcoming).to include(movie)
   end
 
+  it "returns 'upcoming' movies ordered with the soonest-to-be-released first" do
+    soonest = Movie.new(movie_attributes(released_on: Date.tomorrow))
+    next_latest = Movie.new(movie_attributes(released_on: 2.months.from_now))
+    latest = Movie.new(movie_attributes(released_on: 3.months.from_now))
+    next_latest.save!
+    latest.save!
+    soonest.save!
+    expect(Movie.upcoming).to eq([soonest, next_latest, latest])
+  end
+
   context "given a varied range of grossing movies" do
     before do
       # flops gross less than $50 million
