@@ -32,6 +32,100 @@ describe "A movie" do
     expect(Movie.released).to eq([movie3, movie2, movie1])
   end
 
+  it "is 'upcoming' when the released on date is in the future" do
+    movie = Movie.create!(movie_attributes(released_on: Date.tomorrow))
+    expect(Movie.upcoming).to include(movie)
+  end
+
+  it "returns 'upcoming' movies ordered with the soonest-to-be-released first" do
+    soonest = Movie.new(movie_attributes(released_on: Date.tomorrow))
+    next_latest = Movie.new(movie_attributes(released_on: 2.months.from_now))
+    latest = Movie.new(movie_attributes(released_on: 3.months.from_now))
+    next_latest.save!
+    latest.save!
+    soonest.save!
+    expect(Movie.upcoming).to eq([soonest, next_latest, latest])
+  end
+
+  context "given a varied range of grossing movies" do
+    before do
+      # flops gross less than $50 million
+      fifty_million = 50000000
+      @flop1 = Movie.new(movie_attributes(total_gross: fifty_million - 3))
+      @flop2 = Movie.new(movie_attributes(total_gross: fifty_million - 2))
+      @flop3 = Movie.new(movie_attributes(total_gross: fifty_million - 1))
+      @flop2.save
+      @flop1.save
+      @flop3.save
+
+      # hits gross more $300 million or more
+      three_hundred_million = 300000000
+      @hit1 = Movie.new(movie_attributes(total_gross: three_hundred_million + 0))
+      @hit2 = Movie.new(movie_attributes(total_gross: three_hundred_million + 1))
+      @hit3 = Movie.new(movie_attributes(total_gross: three_hundred_million + 2))
+      @hit2.save
+      @hit1.save
+      @hit3.save
+
+      # some movies are neither hits nor flops
+      @middling1 = Movie.create!(movie_attributes(total_gross: fifty_million + 0))
+      @middling2 = Movie.create!(movie_attributes(total_gross: fifty_million + 1))
+      @middling3 = Movie.create!(movie_attributes(total_gross: fifty_million + 2))
+    end
+
+    it "returns 'flop' movies ordered with the lowest-grossing first" do
+      expect(Movie.flops).to eq([@flop1, @flop2, @flop3])
+    end
+
+    it "returns 'hit' movies ordered with the highest-grossing first" do
+      expect(Movie.hits).to eq([@hit3, @hit2, @hit1])
+    end
+
+    it "excludes unreleased movies from flops and hits" do
+      movie1 = Movie.create!(movie_attributes(total_gross: 0, released_on: Date.tomorrow))
+      movie2 = Movie.create!(movie_attributes(total_gross: 500000000, released_on: Date.tomorrow))
+      expect(Movie.flops).not_to include(movie1)
+      expect(Movie.hits).not_to include(movie2)
+    end
+
+  end
+
+  it "can be scoped by a specified rating" do
+    rated_g = Movie.create!(movie_attributes(rating: 'G'))
+    rated_pg = Movie.create!(movie_attributes(rating: 'PG'))
+    rated_pg_13 = Movie.create!(movie_attributes(rating: 'PG-13'))
+    expect(Movie.rated('PG')).to eq([rated_pg])
+  end
+
+  it "does not include unreleased movies when scoped by 'rating'" do
+    rating = 'PG'
+    released = Movie.create!(movie_attributes(rating: rating, released_on: Date.yesterday))
+    unreleased = Movie.create!(movie_attributes(rating: rating, released_on: Date.tomorrow))
+    expect(Movie.rated(rating)).to include(released)
+    expect(Movie.rated(rating)).not_to include(unreleased)
+  end
+
+  context "given some movies with a varied range of release dates" do
+    before do
+      @movie1 = Movie.create!(movie_attributes(released_on: 1.days.ago))
+      @movie2 = Movie.create!(movie_attributes(released_on: 2.days.ago))
+      @movie3 = Movie.create!(movie_attributes(released_on: 3.days.ago))
+      @movie4 = Movie.create!(movie_attributes(released_on: 4.days.ago))
+      @movie5 = Movie.create!(movie_attributes(released_on: 5.days.ago))
+      @movie6 = Movie.create!(movie_attributes(released_on: 6.days.ago))
+    end
+
+    it "can be scoped to 'recent' titles with a default max number of 5" do
+      expect(Movie.recent.count).to eq(5)
+      expect(Movie.recent).not_to include(@movie6)
+    end
+
+    it "can be scoped to 'recent' titles with a specified max number" do
+      expect(Movie.recent(3).count).to eq(3)
+    end
+
+  end
+
   it "requires a title" do
     movie = Movie.new(title: "")
     movie.valid?

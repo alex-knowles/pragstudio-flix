@@ -10,6 +10,8 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 10, allow_blank: true }
 
+  scope :by_name, -> { order(name: :asc) }
+
   def self.authenticate(email, password)
     user = User.find_by(email: email)
     user && user.authenticate(password)

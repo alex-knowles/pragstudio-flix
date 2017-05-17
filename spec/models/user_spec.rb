@@ -104,6 +104,18 @@ describe 'A user' do
     expect(user.favorite_movies).to include(favorite_movie2)
   end
 
+  it "can be scoped by name, ordered alphabetically" do
+    user1 = User.new(user_attributes(name: 'A Smith', email: 'a.smith@mail.com'))
+    user2 = User.new(user_attributes(name: 'B Smith', email: 'b.smith@mail.com'))
+    user3 = User.new(user_attributes(name: 'C Smith', email: 'c.smith@mail.com'))
+    user4 = User.new(user_attributes(name: 'D Smith', email: 'd.smith@mail.com'))
+    user2.save!
+    user1.save!
+    user4.save!
+    user3.save!
+    expect(User.by_name).to eq([user1, user2, user3, user4])
+  end
+
 end
 
 describe 'authenticate' do
