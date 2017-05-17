@@ -105,6 +105,17 @@ describe "A movie" do
     expect(Movie.rated(rating)).not_to include(unreleased)
   end
 
+  it "can be scoped to 'recent' titles with a default max number of 5" do
+    movie1 = Movie.create!(movie_attributes(released_on: 1.days.ago))
+    movie2 = Movie.create!(movie_attributes(released_on: 2.days.ago))
+    movie3 = Movie.create!(movie_attributes(released_on: 3.days.ago))
+    movie4 = Movie.create!(movie_attributes(released_on: 4.days.ago))
+    movie5 = Movie.create!(movie_attributes(released_on: 5.days.ago))
+    movie6 = Movie.create!(movie_attributes(released_on: 6.days.ago))
+    expect(Movie.recent.count).to eq(5)
+    expect(Movie.recent).not_to include(movie6)
+  end
+
   it "requires a title" do
     movie = Movie.new(title: "")
     movie.valid?
