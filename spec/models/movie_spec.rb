@@ -120,6 +120,10 @@ describe "A movie" do
       expect(Movie.recent).not_to include(@movie6)
     end
 
+    it "can be scoped to 'recent' titles with a specified max number" do
+      expect(Movie.recent(3).count).to eq(3)
+    end
+
   end
 
   it "requires a title" do
