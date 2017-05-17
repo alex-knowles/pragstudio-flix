@@ -24,7 +24,7 @@ class Movie < ApplicationRecord
   scope :upcoming, -> { where("released_on > ?", Date.today).order(released_on: :asc) }
   scope :flops, -> { released.where("total_gross < 50000000").order(total_gross: :asc) }
   scope :hits, -> { released.where("total_gross >= 300000000").order(total_gross: :desc) }
-  scope :rated, ->(rating) { where("rating = ?", rating) }
+  scope :rated, ->(rating) { where(rating: rating) }
 
   def average_stars
     reviews.average(:stars)
