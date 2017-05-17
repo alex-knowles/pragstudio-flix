@@ -97,6 +97,14 @@ describe "A movie" do
     expect(Movie.rated('PG')).to eq([rated_pg])
   end
 
+  it "does not include unreleased movies when scoped by 'rating'" do
+    rating = 'PG'
+    released = Movie.create!(movie_attributes(rating: rating, released_on: Date.yesterday))
+    unreleased = Movie.create!(movie_attributes(rating: rating, released_on: Date.tomorrow))
+    expect(Movie.rated(rating)).to include(released)
+    expect(Movie.rated(rating)).not_to include(unreleased)
+  end
+
   it "requires a title" do
     movie = Movie.new(title: "")
     movie.valid?
