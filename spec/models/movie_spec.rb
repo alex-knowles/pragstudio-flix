@@ -90,6 +90,13 @@ describe "A movie" do
 
   end
 
+  it "can be scoped by a specified rating" do
+    rated_g = Movie.create!(movie_attributes(rating: 'G'))
+    rated_pg = Movie.create!(movie_attributes(rating: 'PG'))
+    rated_pg_13 = Movie.create!(movie_attributes(rating: 'PG-13'))
+    expect(Movie.rated('PG')).to eq([rated_pg])
+  end
+
   it "requires a title" do
     movie = Movie.new(title: "")
     movie.valid?
