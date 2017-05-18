@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get "signup" => "users#new"
   resources :users
 
+  get "movies/filter/:scope" => "movies#index", as: :filtered_movies
+
   root "movies#index"
   resources :movies do
     resources :reviews
