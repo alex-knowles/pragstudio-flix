@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Showing a movie' do
 
   before do
-    @movie = Movie.create!(movie_attributes)
+    @movie = Movie.create!(movie_attributes(title: "title1"))
   end
 
   it "shows the movie's details" do
