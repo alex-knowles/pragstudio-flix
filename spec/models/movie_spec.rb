@@ -82,8 +82,8 @@ describe "A movie" do
     end
 
     it "excludes unreleased movies from flops and hits" do
-      movie1 = Movie.create!(movie_attributes(total_gross: 0, released_on: Date.tomorrow))
-      movie2 = Movie.create!(movie_attributes(total_gross: 500000000, released_on: Date.tomorrow))
+      movie1 = Movie.create!(movie_attributes(released_on: Date.tomorrow, total_gross: 0))
+      movie2 = Movie.create!(movie_attributes(released_on: Date.tomorrow, total_gross: 500000000))
       expect(Movie.flops).not_to include(movie1)
       expect(Movie.hits).not_to include(movie2)
     end
