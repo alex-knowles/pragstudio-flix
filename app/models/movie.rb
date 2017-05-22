@@ -31,4 +31,8 @@ class Movie < ApplicationRecord
     reviews.average(:stars)
   end
 
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
+
 end

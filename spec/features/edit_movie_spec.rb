@@ -16,6 +16,7 @@ describe "Editing a movie" do
 
     fill_in 'Title', with: "Updated Movie Title"
     click_button 'Update Movie'
+    movie = Movie.find(movie.id)
     expect(current_path).to eq(movie_path(movie))
     expect(page).to have_text('Updated Movie Title')
     expect(page).to have_text('Movie updated successfully!')
