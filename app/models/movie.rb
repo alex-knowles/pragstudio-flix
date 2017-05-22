@@ -16,16 +16,16 @@ class Movie < ApplicationRecord
   }
   validates :rating, inclusion: { in: RATINGS }
 
-  def flop?
-    total_gross.blank? || total_gross < 50000000
-  end
-
   scope :released, -> { where("released_on <= ?", Date.today).order(released_on: :desc) }
   scope :upcoming, -> { where("released_on > ?", Date.today).order(released_on: :asc) }
   scope :flops, -> { released.where("total_gross < 50000000").order(total_gross: :asc) }
   scope :hits, -> { released.where("total_gross >= 300000000").order(total_gross: :desc) }
   scope :rated, ->(rating) { released.where(rating: rating) }
   scope :recent, ->(max=5) { released.limit(max) }
+
+  def flop?
+    total_gross.blank? || total_gross < 50000000
+  end
 
   def average_stars
     reviews.average(:stars)
