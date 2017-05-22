@@ -132,6 +132,14 @@ describe "A movie" do
     expect(movie.errors[:title].any?).to eq(true)
   end
 
+  it "rejects a title that is not unique" do
+    title = "Citizen Kane"
+    movie1 = Movie.create!(movie_attributes(title: title))
+    movie2 = Movie.new(title: title)
+    movie2.valid?
+    expect(movie2.errors[:title].any?).to eq(true)
+  end
+
   it "requires a description" do
     movie = Movie.new(description: "")
     movie.valid?
