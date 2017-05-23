@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Showing a movie' do
 
   before do
-    @movie = Movie.create!(movie_attributes)
+    @movie = Movie.create!(movie_attributes(title: "title1"))
   end
 
   it "shows the movie's details" do
@@ -62,6 +62,12 @@ describe 'Showing a movie' do
     @movie = Movie.create!(movie_attributes(title: "The Matrix", released_on: "1999-03-21"))
     visit movie_url(@movie)
     expect(page).to have_title("Flix - The Matrix (1999)")
+  end
+
+  it "has an SEO-friendly URL" do
+    movie = Movie.create!(movie_attributes(title: "X-Men: The Last Stand"))
+    visit movie_url(movie)
+    expect(current_path).to eq("/movies/x-men-the-last-stand")
   end
 
 end
