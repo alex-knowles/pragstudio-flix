@@ -64,4 +64,10 @@ describe 'Showing a movie' do
     expect(page).to have_title("Flix - The Matrix (1999)")
   end
 
+  it "has an SEO-friendly URL" do
+    movie = Movie.create!(movie_attributes(title: "X-Men: The Last Stand"))
+    visit movie_url(movie)
+    expect(current_path).to eq("/movies/x-men-the-last-stand")
+  end
+
 end
