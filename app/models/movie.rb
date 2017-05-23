@@ -38,7 +38,7 @@ class Movie < ApplicationRecord
   end
 
   def to_param
-    "#{slug}"
+    slug
   end
 
 end
