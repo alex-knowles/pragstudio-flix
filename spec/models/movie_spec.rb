@@ -140,6 +140,19 @@ describe "A movie" do
     expect(movie2.errors[:title].any?).to eq(true)
   end
 
+  it "generates a slug" do
+    movie = Movie.create!(movie_attributes)
+    expect(movie.slug).not_to be_nil
+    expect(movie.slug.length).to be > 0
+  end
+
+  it "rejects a slug that is not unique" do
+    movie1 = Movie.create!(movie_attributes)
+    movie2 = Movie.new(movie_attributes)
+    movie2.valid?
+    expect(movie2.errors[:slug].any?).to eq(true)
+  end
+
   it "requires a description" do
     movie = Movie.new(description: "")
     movie.valid?
